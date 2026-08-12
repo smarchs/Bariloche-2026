@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bariloche 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7E5D2;
+    --bg-soft:#EFD4B6;
+    --bg-soft-2:#FBF0E2;
+    --text:#3A1B0D;
+    --text-secondary:#93664A;
+    --line: rgba(58,27,13,0.14);
+    --line-soft: rgba(58,27,13,0.10);
+    --accent:#C1541C;
+    --c1:#9A4517;
+    --c2:#C1541C;
+    --c3:#E08A44;
+    --violet:#5E4130;
+    --card-bg:#F0D9BD;
+    --dur-hover:0.2s;
+    --dur-base:0.35s;
+    --dur-entrada:0.5s;
+    --ease:cubic-bezier(.4,0,.2,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    position:relative;
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:'';
+    position:fixed; inset:0; z-index:-1;
+    background-color:var(--bg);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    background-size:120px 120px;
+  }
+  h1,h2,h3{font-family:-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; font-weight:700; letter-spacing:-0.02em; margin:0;}
+
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;
+  }
+
+  .floating-back{
+    position:fixed; top:24px; left:24px; z-index:50;
+    display:none; align-items:center; gap:6px; font-size:14px; font-weight:500;
+    color:var(--text); background:rgba(255,255,255,0.8); backdrop-filter:blur(10px);
+    border:1px solid var(--line-soft); border-radius:999px; padding:8px 16px;
+    cursor:pointer;
+  }
+  .floating-back.show{display:flex;}
+  .floating-back svg{width:15px; height:15px;}
+
+  /* ---------- SCREENS ---------- */
+  .screen{display:none;}
+  .screen.active{display:block;}
+
+  /* ---------- HOME ---------- */
+  .home-hero{padding:100px 24px 64px; text-align:left; position:relative; overflow:hidden;}
+  .blob{position:absolute; border-radius:50%; filter:blur(60px); opacity:0.55; z-index:0;}
+  .blob-1{width:340px; height:340px; background:var(--card-bg); top:-120px; left:8%;}
+  .blob-2{width:300px; height:300px; background:var(--card-bg); top:-60px; right:10%;}
+  .blob-3{width:260px; height:260px; background:var(--card-bg); bottom:-140px; left:40%;}
+  .home-hero .eyebrow{position:relative; z-index:1; font-size:14px; font-weight:600; color:var(--violet); margin-bottom:18px;}
+  .home-hero h1{position:relative; z-index:1; font-size:clamp(44px,7.5vw,80px); line-height:1.05; margin:0; font-weight:700;}
+  .home-subtitle{position:relative; z-index:1; font-size:clamp(17px,2.4vw,22px); color:var(--text-secondary); font-weight:500; margin:14px 0 0;}
+
+  .tiles{
+    max-width:1040px; margin:0 auto; padding:0 24px 120px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+    position:relative; z-index:1;
+  }
+  .tile{
+    border:1px solid var(--line-soft); border-radius:24px;
+    padding:32px 24px; cursor:pointer;
+    transition:box-shadow .25s, transform .25s;
+    display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:18px; min-height:120px;
+  }
+  .tile .tile-text{text-align:left;}
+  .tile:hover{box-shadow:0 16px 36px rgba(62,33,21,0.14); transform:translateY(-3px);}
+  .tile:active{transform:scale(0.97);}
+  .tile-1, .tile-2, .tile-3, .tile-4{background:var(--card-bg);}
+  .tile-icon{
+    width:52px; height:52px; border-radius:14px; background:rgba(255,255,255,0.65);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .tile-icon svg{width:26px; height:26px; stroke:var(--text);}
+  .tile h3{font-size:23px; font-weight:600;}
+
+  /* ---------- GRUPOS SCREEN ---------- */
+  .page-title{padding:110px 24px 32px; text-align:left; max-width:640px; margin:0 auto;}
+  .page-title h2{font-size:clamp(30px,4vw,44px);}
+
+  /* ---------- GRUPOS: letras ---------- */
+  .letters-row{
+    position:relative; display:flex; justify-content:flex-start; gap:14px; margin-bottom:32px;
+    max-width:640px; margin-left:auto; margin-right:auto; padding:0 24px;
+  }
+  .letters-track{position:relative; display:flex; gap:14px;}
+  .letters-indicator{
+    position:absolute; top:0; left:0; width:64px; height:64px; border-radius:20px;
+    background:var(--card-bg); box-shadow:0 6px 18px rgba(200,90,46,0.28);
+    transition:transform var(--dur-base) var(--ease); z-index:0;
+  }
+  .letter-btn{
+    position:relative; z-index:1;
+    width:64px; height:64px; border-radius:20px; border:1px solid var(--line-soft);
+    background:transparent; color:var(--text-secondary);
+    font-family:-apple-system, BlinkMacSystemFont, 'Inter', sans-serif; font-size:22px; font-weight:700; cursor:pointer;
+    transition:color var(--dur-base) var(--ease), transform var(--dur-hover) var(--ease);
+  }
+  .letter-btn:hover{color:var(--text);}
+  .letter-btn.active{color:var(--text); border-color:transparent;}
+  .letter-btn:active{transform:scale(0.93);}
+
+  .letter-panels{max-width:640px; margin:0 auto; padding:0 24px 100px;}
+  .letter-panel{display:none;}
+  .letter-panel.active{display:block; animation:fadeIn .3s ease;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  .sub-block{
+    background:var(--card-bg); border:1px solid var(--line-soft); border-radius:24px;
+    padding:28px 26px; margin-bottom:18px;
+    transition:box-shadow .25s, transform .25s;
+  }
+  .sub-block:hover{box-shadow:0 16px 36px rgba(62,33,21,0.14); transform:translateY(-3px);}
+  .sub-block:active{transform:scale(0.99);}
+  .sub-head{display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
+  .sub-badge{
+    font-family:-apple-system, BlinkMacSystemFont, 'Inter', sans-serif; font-weight:700; font-size:15px; color:var(--text);
+    background:rgba(255,255,255,0.65); border-radius:10px; padding:5px 13px;
+  }
+  .sub-count{font-size:12px; color:var(--text-secondary); margin-left:auto;}
+  .mini-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+  .mini-row{
+    font-size:14px; color:var(--text); padding:8px 4px;
+    display:flex; align-items:center; gap:10px;
+    border-bottom:1px solid rgba(62,33,21,0.08);
+  }
+  .mini-row:last-child{border-bottom:none;}
+  .mini-row.cascade-in{animation:itemFadeIn var(--dur-base) var(--ease) both;}
+  .mini-row:nth-child(1).cascade-in{animation-delay:.02s;}
+  .mini-row:nth-child(2).cascade-in{animation-delay:.04s;}
+  .mini-row:nth-child(3).cascade-in{animation-delay:.06s;}
+  .mini-row:nth-child(4).cascade-in{animation-delay:.08s;}
+  .mini-row:nth-child(5).cascade-in{animation-delay:.10s;}
+  .mini-row:nth-child(6).cascade-in{animation-delay:.12s;}
+  .mini-row:nth-child(7).cascade-in{animation-delay:.14s;}
+  .mini-row:nth-child(8).cascade-in{animation-delay:.16s;}
+  .mini-row:nth-child(9).cascade-in{animation-delay:.18s;}
+  .mini-row:nth-child(10).cascade-in{animation-delay:.20s;}
+  .mini-row:nth-child(n+11).cascade-in{animation-delay:.22s;}
+  @keyframes itemFadeIn{from{opacity:0; transform:translateX(-6px);} to{opacity:1; transform:translateX(0);}}
+  .mini-row .dot{width:6px; height:6px; border-radius:50%; flex-shrink:0;}
+  .mini-row.c1 .dot{background:var(--c1);}
+  .mini-row.c2 .dot{background:var(--c2);}
+  .mini-row.c3 .dot{background:var(--c3);}
+  .mini-row .mini-name{flex:1;}
+  .mini-row .mini-tag{font-size:12px; color:var(--text-secondary); text-align:right;}
+  .mini-row.doc-row{font-weight:600;}
+  .mini-row.doc-row .dot.doc-dot{background:var(--violet);}
+  .mini-row.doc-row .mini-tag{color:var(--violet); font-weight:600;}
+
+  /* ---------- FINDER ---------- */
+  .finder{max-width:640px; margin:0 auto 56px; padding:0 24px; text-align:left;}
+  .finder h3{font-size:22px; margin-bottom:18px;}
+  .finder .search-box{
+    display:flex; align-items:center; gap:8px;
+    background:var(--bg-soft-2); border:1px solid var(--line-soft); border-radius:14px; padding:12px 16px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .finder .search-box:focus-within{border-color:var(--card-bg); box-shadow:0 0 0 4px rgba(200,90,46,0.20);}
+  .finder .search-box svg{width:16px; height:16px; stroke:var(--text-secondary); flex-shrink:0;}
+  .finder .search-box input{
+    border:none; outline:none; background:none; font-size:15px; color:var(--text);
+    font-family:'Inter',sans-serif; width:100%;
+  }
+  .suggest-list{list-style:none; margin:8px 0 0; padding:0; text-align:left;}
+  .suggest-list li{
+    padding:11px 16px; border-radius:12px; font-size:14.5px; color:var(--text);
+    cursor:pointer; transition:background .15s;
+  }
+  .suggest-list li:hover{background:var(--card-bg);}
+  .finder-result{margin-top:20px;}
+  .result-card{
+    background:var(--card-bg); border-radius:18px; padding:22px; text-align:left;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .result-name{font-family:-apple-system, BlinkMacSystemFont, 'Inter', sans-serif; font-weight:700; font-size:17px; margin:0;}
+  .result-groups{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+  .result-chip{
+    font-size:13px; font-weight:600; color:var(--text); background:rgba(255,255,255,0.7);
+    border-radius:999px; padding:7px 16px; cursor:pointer; transition:transform .15s;
+  }
+  .result-chip:hover{transform:translateY(-2px);}
+  .result-chip:active{transform:scale(0.94);}
+  .highlight-row{animation:pulseHighlight 1.6s ease;}
+  @keyframes pulseHighlight{
+    0%{background:var(--card-bg);} 100%{background:transparent;}
+  }
+
+  /* ---------- PLACEHOLDER SCREENS ---------- */
+  .placeholder{
+    max-width:640px; margin:0 auto; padding:120px 24px 140px; text-align:left;
+  }
+  .placeholder-icon{
+    width:64px; height:64px; border-radius:18px; background:var(--card-bg);
+    display:flex; align-items:center; justify-content:center; margin:0 0 28px;
+  }
+  .placeholder-icon svg{width:30px; height:30px; stroke:var(--text);}
+  .placeholder h2{font-size:28px; margin-bottom:10px;}
+  .placeholder .tag{
+    display:inline-block; font-size:12px; font-weight:600; color:#8A6D3E;
+    background:var(--card-bg); padding:4px 12px; border-radius:999px;
+  }
+
+  @media (max-width: 860px){
+    .tiles{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width: 560px){
+    .tiles{grid-template-columns:1fr;}
+    .home-hero{padding:80px 24px 48px;}
+    .blob{opacity:0.35;}
+    .blob-1{width:220px; height:220px;}
+    .blob-2{width:200px; height:200px;}
+    .blob-3{width:180px; height:180px;}
+    .letter-btn, .letters-indicator{width:52px; height:52px; border-radius:16px;}
+    .letter-btn{font-size:18px;}
+    .sub-block{padding:22px 18px;}
+    .result-card{align-items:flex-start;}
+    .result-groups{justify-content:flex-start;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important; animation-delay:0s !important;
+      transition-duration:0.01ms !important; scroll-behavior:auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="floating-back" id="backBtn" onclick="showScreen('home')">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  Inicio
+</button>
+
+<!-- HOME -->
+<div class="screen active" id="screen-home">
+  <div class="home-hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <h1>Viaje de Estudios</h1>
+    <p class="home-subtitle">Bariloche 2026 — Mecánica</p>
+  </div>
+  <div class="tiles">
+    <div class="tile tile-1" onclick="showScreen('visitas')">
+      <div class="tile-text">
+        <h3>Visitas</h3></div>
+      <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    </div>
+    <div class="tile tile-2" onclick="showScreen('grupos')">
+      <div class="tile-text">
+        <h3>Grupos</h3></div>
+      <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    </div>
+    <div class="tile tile-3" onclick="showScreen('cronograma')">
+      <div class="tile-text">
+        <h3>Cronograma</h3></div>
+      <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+    </div>
+    <div class="tile tile-4" onclick="showScreen('habitaciones')">
+      <div class="tile-text">
+        <h3>Habitaciones Hostel</h3></div>
+      <div class="tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- VISITAS -->
+<div class="screen" id="screen-visitas">
+  <div class="placeholder">
+    <h2>Visitas</h2>
+    <span class="tag">Próximamente</span>
+  </div>
+</div>
+
+<!-- GRUPOS -->
+<div class="screen" id="screen-grupos">
+  <div class="page-title"><h2>Grupos</h2></div>
+
+  <div class="letters-row">
+    <div class="letters-track" id="lettersTrack">
+      <span class="letters-indicator" id="lettersIndicator"></span>
+      <button class="letter-btn active" data-letter="1">1</button>
+      <button class="letter-btn" data-letter="2">2</button>
+      <button class="letter-btn" data-letter="3">3</button>
+    </div>
+  </div>
+
+  <div class="finder">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="finderInput" placeholder="Escribí tu nombre…" autocomplete="off">
+    </div>
+    <ul class="suggest-list" id="suggestList"></ul>
+    <div class="finder-result" id="finderResult"></div>
+  </div>
+
+  <div class="letter-panels">
+    <div class="letter-panel active" id="panel-1">
+
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">1A</span>
+          <span class="sub-count">53 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Lucía Silva</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Marcelo Silva</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Santiago Urweider</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Víctor Santander</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aballay, Lautaro Nehuén</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aliaga Álvarez, Tobías</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Atis, Lautaro Emanuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Bova, Francisco Tomás</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cabrera, Agustina</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Campos, Priscila Giuliana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Colilaf, Benjamín Ian</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Condori Huarachi, Franco Denis</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cortez Izquierdo, Joaquín Ignacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Fuentealba, Ailén del Carmen</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">García Suárez, Ezequiel Enrique</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Gómez, Gimena Magdalena</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">González, Valentín Bruno</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Hernández, Mateo Bautista</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huaiquimil, Matías Oscar</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huentemil, Taiel Horacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Marinao, Alexis Alejo Nataniel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Millaldeo Venegas, Geraldine Daiana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Osses González, Samira Yasmín</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Velázquez Sepulveda, Álvaro Manuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Aguayo, Daniel Esteban</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Alegre, Camila Alelí</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Álvarez, Denis Rafael</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Amrein, Franco Silvan</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Barrios, Bruno Nicolás</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Beroiza, Daiana Mailén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Carrasco, Matías Emanuel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">D'Agostino, Milo Joaquín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Gonzalez Cortijo, Lucas Daniel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hernández Gatica, Lucio</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hueitra Molines, Bautista Gastón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Mansilla, Rocío Belén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Medina, Sofía Helena</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Samuel Vázquez, Simón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Sombra, Thiago Benjamín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Vergara López, Bruno Alejandro</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antinori, Thiago Elías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antrichipay Matus, Franco Jeremías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Asenjo Rodríguez, Galo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Benítez, Lisandro Agustín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bou Abdo, Franco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bravo, Lautaro Facundo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bustos, Benjamín Pablo Isaías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Caram, Emir Omar</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Carrieri, Luciano Valentín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Cide Bueno, Cala</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Coronel, Tihara Anabella</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">De la Hoz, Magdalena Luján</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Díaz, Tomás Tiziano</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Mhounh Maripini, Luca Francisco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Ruíz, Santiago Benjamín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Sáez, Melina Adriana</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Villaruel, Fausto Nicanor</span><span class="mini-tag">4.º 3.ª</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="letter-panel" id="panel-2">
+
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">2A</span>
+          <span class="sub-count">26 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Lucía Silva</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Marcelo Silva</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cabrera, Agustina</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Campos, Priscila Giuliana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Fuentealba, Ailén del Carmen</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Gómez, Gimena Magdalena</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Millaldeo Venegas, Geraldine Daiana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Osses González, Samira Yasmín</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Aguayo, Daniel Esteban</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Alegre, Camila Alelí</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Álvarez, Denis Rafael</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Amrein, Franco Silvan</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Barrios, Bruno Nicolás</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Beroiza, Daiana Mailén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Carrasco, Matías Emanuel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">D'Agostino, Milo Joaquín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Gonzalez Cortijo, Lucas Daniel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hernández Gatica, Lucio</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hueitra Molines, Bautista Gastón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Mansilla, Rocío Belén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Medina, Sofía Helena</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Samuel Vázquez, Simón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Sombra, Thiago Benjamín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Vergara López, Bruno Alejandro</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Cide Bueno, Cala</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Coronel, Tihara Anabella</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">De la Hoz, Magdalena Luján</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Sáez, Melina Adriana</span><span class="mini-tag">4.º 3.ª</span></li>
+        </ul>
+      </div>
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">2B</span>
+          <span class="sub-count">27 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Santiago Urweider</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Víctor Santander</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aballay, Lautaro Nehuén</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aliaga Álvarez, Tobías</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Atis, Lautaro Emanuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Bova, Francisco Tomás</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Colilaf, Benjamín Ian</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Condori Huarachi, Franco Denis</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cortez Izquierdo, Joaquín Ignacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">García Suárez, Ezequiel Enrique</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">González, Valentín Bruno</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Hernández, Mateo Bautista</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huaiquimil, Matías Oscar</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huentemil, Taiel Horacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Marinao, Alexis Alejo Nataniel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Velázquez Sepulveda, Álvaro Manuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antinori, Thiago Elías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antrichipay Matus, Franco Jeremías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Asenjo Rodríguez, Galo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Benítez, Lisandro Agustín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bou Abdo, Franco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bravo, Lautaro Facundo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bustos, Benjamín Pablo Isaías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Caram, Emir Omar</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Carrieri, Luciano Valentín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Díaz, Tomás Tiziano</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Mhounh Maripini, Luca Francisco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Ruíz, Santiago Benjamín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Villaruel, Fausto Nicanor</span><span class="mini-tag">4.º 3.ª</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="letter-panel" id="panel-3">
+
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">3A</span>
+          <span class="sub-count">18 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Lucía Silva</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cabrera, Agustina</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Campos, Priscila Giuliana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Fuentealba, Ailén del Carmen</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Gómez, Gimena Magdalena</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Millaldeo Venegas, Geraldine Daiana</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Osses González, Samira Yasmín</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Alegre, Camila Alelí</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Beroiza, Daiana Mailén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Carrasco, Matías Emanuel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">D'Agostino, Milo Joaquín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Gonzalez Cortijo, Lucas Daniel</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hernández Gatica, Lucio</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Mansilla, Rocío Belén</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Medina, Sofía Helena</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Cide Bueno, Cala</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Coronel, Tihara Anabella</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">De la Hoz, Magdalena Luján</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Sáez, Melina Adriana</span><span class="mini-tag">4.º 3.ª</span></li>
+        </ul>
+      </div>
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">3B</span>
+          <span class="sub-count">18 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Santiago Urweider</span><span class="mini-tag">Docente</span></li>
+<li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Víctor Santander</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aballay, Lautaro Nehuén</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Aliaga Álvarez, Tobías</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Atis, Lautaro Emanuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Bova, Francisco Tomás</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Colilaf, Benjamín Ian</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Condori Huarachi, Franco Denis</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Cortez Izquierdo, Joaquín Ignacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">García Suárez, Ezequiel Enrique</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">González, Valentín Bruno</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Hernández, Mateo Bautista</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huaiquimil, Matías Oscar</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Huentemil, Taiel Horacio</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Marinao, Alexis Alejo Nataniel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c1 cascade-in"><span class="dot"></span><span class="mini-name">Velázquez Sepulveda, Álvaro Manuel</span><span class="mini-tag">4.º 1.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Hueitra Molines, Bautista Gastón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Samuel Vázquez, Simón</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Sombra, Thiago Benjamín</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Vergara López, Bruno Alejandro</span><span class="mini-tag">4.º 2.ª</span></li>
+        </ul>
+      </div>
+      <div class="sub-block">
+        <div class="sub-head">
+          <span class="sub-badge">3C</span>
+          <span class="sub-count">17 estudiantes</span>
+        </div>
+        <ul class="mini-list">
+          <li class="mini-row doc-row cascade-in"><span class="dot doc-dot"></span><span class="mini-name">Marcelo Silva</span><span class="mini-tag">Docente</span></li>
+          <li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Aguayo, Daniel Esteban</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Álvarez, Denis Rafael</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Amrein, Franco Silvan</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c2 cascade-in"><span class="dot"></span><span class="mini-name">Barrios, Bruno Nicolás</span><span class="mini-tag">4.º 2.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antinori, Thiago Elías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Antrichipay Matus, Franco Jeremías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Asenjo Rodríguez, Galo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Benítez, Lisandro Agustín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bou Abdo, Franco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bravo, Lautaro Facundo</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Bustos, Benjamín Pablo Isaías</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Caram, Emir Omar</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Carrieri, Luciano Valentín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Díaz, Tomás Tiziano</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Mhounh Maripini, Luca Francisco</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Ruíz, Santiago Benjamín</span><span class="mini-tag">4.º 3.ª</span></li>
+<li class="mini-row c3 cascade-in"><span class="dot"></span><span class="mini-name">Villaruel, Fausto Nicanor</span><span class="mini-tag">4.º 3.ª</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CRONOGRAMA -->
+<div class="screen" id="screen-cronograma">
+  <div class="placeholder">
+    <h2>Cronograma</h2>
+    <span class="tag">Próximamente</span>
+  </div>
+</div>
+
+<!-- HABITACIONES -->
+<div class="screen" id="screen-habitaciones">
+  <div class="placeholder">
+    <h2>Habitaciones Hostel</h2>
+    <span class="tag">Próximamente</span>
+  </div>
+</div>
+
+<script>
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('backBtn').classList.toggle('show', name !== 'home');
+    window.scrollTo(0,0);
+  }
+
+  const letterBtns = document.querySelectorAll('.letter-btn');
+  const lettersIndicator = document.getElementById('lettersIndicator');
+
+  function moveIndicator(btn){
+    if (!btn || !lettersIndicator) return;
+    lettersIndicator.style.transform = `translateX(${btn.offsetLeft}px)`;
+  }
+
+  letterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      letterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      moveIndicator(btn);
+      document.querySelectorAll('.letter-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + btn.dataset.letter).classList.add('active');
+      restartCascade(btn.dataset.letter);
+    });
+  });
+  moveIndicator(document.querySelector('.letter-btn.active'));
+  window.addEventListener('resize', () => moveIndicator(document.querySelector('.letter-btn.active')));
+
+  function restartCascade(letter){
+    const rows = document.querySelectorAll('#panel-' + letter + ' .mini-row');
+    rows.forEach(r => { r.classList.remove('cascade-in'); void r.offsetWidth; r.classList.add('cascade-in'); });
+  }
+  restartCascade('1');
+
+  function openLetter(code){
+    // code es algo como "2A" o "3B" -> el panel corresponde al primer carácter (2 o 3)
+    const letter = code.slice(0,1);
+    document.querySelectorAll('.letter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.letter === letter);
+      if (b.dataset.letter === letter) moveIndicator(b);
+    });
+    document.querySelectorAll('.letter-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + letter);
+    });
+    restartCascade(letter);
+    setTimeout(() => {
+      const badges = document.querySelectorAll('#panel-' + letter + ' .sub-badge');
+      let target = null;
+      badges.forEach(b => {
+        if (b.textContent.trim() === code) target = b.closest('.sub-block');
+      });
+      if (target) {
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        target.classList.add('highlight-row');
+        setTimeout(() => target.classList.remove('highlight-row'), 1600);
+      }
+    }, 80);
+  }
+
+  // ---- Buscador "Buscá tu grupo" ----
+  const FINDER_DATA = [{"n": "Aballay, Lautaro Nehuén", "s": "aballay lautaro nehuen", "g2": "2B", "g3": "3B"}, {"n": "Aguayo, Daniel Esteban", "s": "aguayo daniel esteban", "g2": "2A", "g3": "3C"}, {"n": "Alegre, Camila Alelí", "s": "alegre camila aleli", "g2": "2A", "g3": "3A"}, {"n": "Aliaga Álvarez, Tobías", "s": "aliaga alvarez tobias", "g2": "2B", "g3": "3B"}, {"n": "Álvarez, Denis Rafael", "s": "alvarez denis rafael", "g2": "2A", "g3": "3C"}, {"n": "Amrein, Franco Silvan", "s": "amrein franco silvan", "g2": "2A", "g3": "3C"}, {"n": "Antinori, Thiago Elías", "s": "antinori thiago elias", "g2": "2B", "g3": "3C"}, {"n": "Antrichipay Matus, Franco Jeremías", "s": "antrichipay matus franco jeremias", "g2": "2B", "g3": "3C"}, {"n": "Asenjo Rodríguez, Galo", "s": "asenjo rodriguez galo", "g2": "2B", "g3": "3C"}, {"n": "Atis, Lautaro Emanuel", "s": "atis lautaro emanuel", "g2": "2B", "g3": "3B"}, {"n": "Barrios, Bruno Nicolás", "s": "barrios bruno nicolas", "g2": "2A", "g3": "3C"}, {"n": "Benítez, Lisandro Agustín", "s": "benitez lisandro agustin", "g2": "2B", "g3": "3C"}, {"n": "Beroiza, Daiana Mailén", "s": "beroiza daiana mailen", "g2": "2A", "g3": "3A"}, {"n": "Bou Abdo, Franco", "s": "bou abdo franco", "g2": "2B", "g3": "3C"}, {"n": "Bova, Francisco Tomás", "s": "bova francisco tomas", "g2": "2B", "g3": "3B"}, {"n": "Bravo, Lautaro Facundo", "s": "bravo lautaro facundo", "g2": "2B", "g3": "3C"}, {"n": "Bustos, Benjamín Pablo Isaías", "s": "bustos benjamin pablo isaias", "g2": "2B", "g3": "3C"}, {"n": "Cabrera, Agustina", "s": "cabrera agustina", "g2": "2A", "g3": "3A"}, {"n": "Campos, Priscila Giuliana", "s": "campos priscila giuliana", "g2": "2A", "g3": "3A"}, {"n": "Caram, Emir Omar", "s": "caram emir omar", "g2": "2B", "g3": "3C"}, {"n": "Carrasco, Matías Emanuel", "s": "carrasco matias emanuel", "g2": "2A", "g3": "3A"}, {"n": "Carrieri, Luciano Valentín", "s": "carrieri luciano valentin", "g2": "2B", "g3": "3C"}, {"n": "Cide Bueno, Cala", "s": "cide bueno cala", "g2": "2A", "g3": "3A"}, {"n": "Colilaf, Benjamín Ian", "s": "colilaf benjamin ian", "g2": "2B", "g3": "3B"}, {"n": "Condori Huarachi, Franco Denis", "s": "condori huarachi franco denis", "g2": "2B", "g3": "3B"}, {"n": "Coronel, Tihara Anabella", "s": "coronel tihara anabella", "g2": "2A", "g3": "3A"}, {"n": "Cortez Izquierdo, Joaquín Ignacio", "s": "cortez izquierdo joaquin ignacio", "g2": "2B", "g3": "3B"}, {"n": "D'Agostino, Milo Joaquín", "s": "d'agostino milo joaquin", "g2": "2A", "g3": "3A"}, {"n": "De la Hoz, Magdalena Luján", "s": "de la hoz magdalena lujan", "g2": "2A", "g3": "3A"}, {"n": "Díaz, Tomás Tiziano", "s": "diaz tomas tiziano", "g2": "2B", "g3": "3C"}, {"n": "Fuentealba, Ailén del Carmen", "s": "fuentealba ailen del carmen", "g2": "2A", "g3": "3A"}, {"n": "García Suárez, Ezequiel Enrique", "s": "garcia suarez ezequiel enrique", "g2": "2B", "g3": "3B"}, {"n": "Gómez, Gimena Magdalena", "s": "gomez gimena magdalena", "g2": "2A", "g3": "3A"}, {"n": "Gonzalez Cortijo, Lucas Daniel", "s": "gonzalez cortijo lucas daniel", "g2": "2A", "g3": "3A"}, {"n": "González, Valentín Bruno", "s": "gonzalez valentin bruno", "g2": "2B", "g3": "3B"}, {"n": "Hernández Gatica, Lucio", "s": "hernandez gatica lucio", "g2": "2A", "g3": "3A"}, {"n": "Hernández, Mateo Bautista", "s": "hernandez mateo bautista", "g2": "2B", "g3": "3B"}, {"n": "Huaiquimil, Matías Oscar", "s": "huaiquimil matias oscar", "g2": "2B", "g3": "3B"}, {"n": "Hueitra Molines, Bautista Gastón", "s": "hueitra molines bautista gaston", "g2": "2A", "g3": "3B"}, {"n": "Huentemil, Taiel Horacio", "s": "huentemil taiel horacio", "g2": "2B", "g3": "3B"}, {"n": "Mansilla, Rocío Belén", "s": "mansilla rocio belen", "g2": "2A", "g3": "3A"}, {"n": "Marinao, Alexis Alejo Nataniel", "s": "marinao alexis alejo nataniel", "g2": "2B", "g3": "3B"}, {"n": "Medina, Sofía Helena", "s": "medina sofia helena", "g2": "2A", "g3": "3A"}, {"n": "Mhounh Maripini, Luca Francisco", "s": "mhounh maripini luca francisco", "g2": "2B", "g3": "3C"}, {"n": "Millaldeo Venegas, Geraldine Daiana", "s": "millaldeo venegas geraldine daiana", "g2": "2A", "g3": "3A"}, {"n": "Osses González, Samira Yasmín", "s": "osses gonzalez samira yasmin", "g2": "2A", "g3": "3A"}, {"n": "Ruíz, Santiago Benjamín", "s": "ruiz santiago benjamin", "g2": "2B", "g3": "3C"}, {"n": "Sáez, Melina Adriana", "s": "saez melina adriana", "g2": "2A", "g3": "3A"}, {"n": "Samuel Vázquez, Simón", "s": "samuel vazquez simon", "g2": "2A", "g3": "3B"}, {"n": "Sombra, Thiago Benjamín", "s": "sombra thiago benjamin", "g2": "2A", "g3": "3B"}, {"n": "Velázquez Sepulveda, Álvaro Manuel", "s": "velazquez sepulveda alvaro manuel", "g2": "2B", "g3": "3B"}, {"n": "Vergara López, Bruno Alejandro", "s": "vergara lopez bruno alejandro", "g2": "2A", "g3": "3B"}, {"n": "Villaruel, Fausto Nicanor", "s": "villaruel fausto nicanor", "g2": "2B", "g3": "3C"}];
+  const finderInput = document.getElementById('finderInput');
+  const suggestList = document.getElementById('suggestList');
+  const finderResult = document.getElementById('finderResult');
+
+  function norm(s){
+    return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
+
+  if (finderInput){
+    finderInput.addEventListener('input', () => {
+      const q = norm(finderInput.value.trim());
+      finderResult.innerHTML = '';
+      if (!q){ suggestList.innerHTML=''; return; }
+      const matches = FINDER_DATA.filter(p => p.s.includes(q)).slice(0,6);
+      suggestList.innerHTML = matches.map(p =>
+        `<li data-name="${p.n}">${p.n}</li>`
+      ).join('');
+    });
+
+    suggestList.addEventListener('click', (e) => {
+      const li = e.target.closest('li');
+      if (!li) return;
+      const person = FINDER_DATA.find(p => p.n === li.dataset.name);
+      if (!person) return;
+      finderInput.value = person.n;
+      suggestList.innerHTML = '';
+      const chips = [`<span class="result-chip" data-code="1A">1A</span>`];
+      if (person.g2) chips.push(`<span class="result-chip" data-code="${person.g2}">${person.g2}</span>`);
+      if (person.g3) chips.push(`<span class="result-chip" data-code="${person.g3}">${person.g3}</span>`);
+      finderResult.innerHTML = `
+        <div class="result-card">
+          <div class="result-name">${person.n}</div>
+          <div class="result-groups">${chips.join('')}</div>
+        </div>`;
+      finderResult.querySelectorAll('.result-chip').forEach(chip => {
+        chip.addEventListener('click', () => openLetter(chip.dataset.code));
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
