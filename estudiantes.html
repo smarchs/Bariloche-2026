@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bariloche 2026 — Viaje de Estudios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F0E8;
+  --paper-2:#EAE6D9;
+  --ink:#15130F;
+  --ink-soft:#6B6559;
+  --accent:#FF5A1F;
+  --line: rgba(21,19,15,0.85);
+  --line-soft: rgba(21,19,15,0.18);
+  --dur:0.18s;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'JetBrains Mono', monospace;
+  min-height:100vh; display:flex; flex-direction:column;
+}
+h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.01em;}
+a{color:inherit;}
+button, input{font-family:inherit;}
+a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+/* ---------- TEXTURA DE PAPEL ---------- */
+body::before{
+  content:''; position:fixed; inset:0; z-index:-1; background:var(--paper);
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:34px 34px; opacity:0.35;
+}
+
+/* ---------- HEADER TIPO TICKET ---------- */
+header{
+  position:sticky; top:0; z-index:100; background:var(--paper);
+  border-bottom:2px solid var(--ink);
+}
+.header-top{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 5vw; max-width:1200px; margin:0 auto;
+}
+.marca{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; letter-spacing:-0.02em; text-decoration:none;}
+.marca span{color:var(--accent);}
+.folio{font-size:11px; color:var(--ink-soft); letter-spacing:0.08em;}
+
+.perforacion{
+  position:relative; height:0; border-top:2px dashed var(--line);
+  max-width:1200px; margin:0 auto;
+}
+.perforacion::before, .perforacion::after{
+  content:''; position:absolute; top:-9px; width:18px; height:18px; border-radius:50%;
+  background:var(--paper); border:2px solid var(--ink);
+}
+.perforacion::before{left:-9px;}
+.perforacion::after{right:-9px;}
+
+nav.tabs{
+  display:flex; overflow-x:auto; max-width:1200px; margin:0 auto;
+  scrollbar-width:none;
+}
+nav.tabs::-webkit-scrollbar{display:none;}
+nav.tabs button{
+  flex-shrink:0; background:none; border:none; border-right:1px solid var(--line-soft);
+  padding:12px 22px; font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); cursor:pointer;
+  transition:background var(--dur) var(--ease), color var(--dur) var(--ease);
+  white-space:nowrap;
+}
+nav.tabs button:hover{color:var(--ink); background:var(--paper-2);}
+nav.tabs button.activo{background:var(--ink); color:var(--paper);}
+
+/* ---------- SECCIONES ---------- */
+.seccion{display:none; max-width:1200px; margin:0 auto; padding:6vh 5vw 90px; flex-grow:1; width:100%;}
+.seccion.active{display:block; animation:entrar 0.35s var(--ease) both;}
+@keyframes entrar{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+.ticket-titulo{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:20px;
+  border-bottom:2px solid var(--ink); padding-bottom:20px; margin-bottom:28px; flex-wrap:wrap;
+}
+.ticket-titulo h1{font-size:clamp(32px,5.5vw,56px); line-height:1;}
+.ticket-titulo .idx{font-size:12px; color:var(--ink-soft); letter-spacing:0.1em; text-transform:uppercase;}
+.lede{font-size:15px; color:var(--ink-soft); max-width:520px; margin-bottom:10px; line-height:1.6;}
+
+/* ---------- SELECTOR DE DIVISIÓN (clase de ticket) ---------- */
+.clase-selector{display:flex; gap:0; margin-bottom:28px; border:2px solid var(--ink); width:fit-content;}
+.clase-selector button{
+  background:none; border:none; padding:11px 26px; font-family:'JetBrains Mono',monospace;
+  font-size:14px; font-weight:700; letter-spacing:0.04em; color:var(--ink); cursor:pointer;
+  border-right:2px solid var(--ink); transition:background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.clase-selector button:last-child{border-right:none;}
+.clase-selector button.activo{background:var(--ink); color:var(--paper);}
+.clase-selector button:hover:not(.activo){background:var(--paper-2);}
+.clase-selector button[data-v="1"]{border-left:5px solid #E3A870;}
+.clase-selector button[data-v="2"]{border-left:5px solid #8FB5DE;}
+.clase-selector button[data-v="3"]{border-left:5px solid #93C79E;}
+
+/* ---------- MANIFIESTO (panel de lista) ---------- */
+.panel-grupo{display:none;}
+.panel-grupo.activo{display:block; animation:entrar 0.3s var(--ease) both;}
+.manifiesto{border:2px solid var(--ink); margin-bottom:24px; background:var(--paper-2);}
+.manifiesto-head{
+  display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
+  padding:14px 20px; border-bottom:2px solid var(--ink); background:var(--ink); color:var(--paper);
+}
+.manifiesto-head .cod{font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700;}
+.manifiesto-head .cant{font-size:11px; letter-spacing:0.08em; color:var(--accent); font-weight:700;}
+.manifiesto-head .doc-line{margin-left:auto; font-size:11.5px; color:var(--paper); opacity:0.75;}
+
+.lista{list-style:none;}
+.fila{
+  display:flex; align-items:center; gap:14px; padding:9px 20px;
+  border-bottom:1px solid var(--line-soft); font-size:13.5px;
+  transition:background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.lista li:last-child{border-bottom:none;}
+.fila:hover{background:var(--ink); color:var(--paper);}
+.fila:hover .badge{background:var(--paper); color:var(--ink);}
+.fila:hover .dato{color:var(--paper);}
+.num{color:var(--ink-soft); font-weight:600; min-width:2.4ch;}
+.fila:hover .num{color:var(--accent);}
+#cronoContent .num{width:11ch; min-width:11ch; flex-shrink:0; white-space:nowrap;}
+.nombre{flex:1; font-weight:500;}
+.badge{
+  font-size:10.5px; font-weight:700; letter-spacing:0.04em; padding:2px 8px;
+  border:1px solid var(--ink); flex-shrink:0;
+}
+.badge-c1{background:#F7D9BE; color:var(--ink); border-color:#E3A870;}
+.badge-c2{background:#C9DDF3; color:var(--ink); border-color:#8FB5DE;}
+.badge-c3{background:#CFE8D2; color:var(--ink); border-color:#93C79E;}
+.badge-curso1{background:#F5CBDA; color:var(--ink); border-color:#DE8FA9;}
+.badge-curso2{background:#F1E3A6; color:var(--ink); border-color:#D9BE58;}
+.badge-curso3{background:#DCC9F0; color:var(--ink); border-color:#B78FDE;}
+.badge-doc{background:#E6E0D2; color:var(--ink); border-color:#B7AC8E;}
+.lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
+.fila:hover .lugar{color:var(--paper); opacity:0.75;}
+.dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:right; flex-shrink:0; font-variant-numeric:tabular-nums;}
+
+/* ---------- BASE DE DATOS: ENCABEZADO + PIN ---------- */
+.db-encabezado{
+  display:flex; align-items:center; gap:14px; padding:0 20px 8px; margin-bottom:2px;
+  font-size:10.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
+  min-width:520px;
+}
+.db-encabezado .num{min-width:2.4ch;}
+.db-encabezado .nombre{flex:1;}
+.db-encabezado .badge-col{width:44px;}
+.db-encabezado .dato{width:104px; text-align:right;}
+.db-scroll{overflow-x:auto;}
+.db-scroll .manifiesto, .db-scroll .lista{min-width:520px;}
+
+.check{border:2px solid var(--ink); background:var(--paper-2); padding:26px 24px; max-width:380px;}
+.check-label{font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;}
+.check-fila{display:flex; gap:10px;}
+.check-fila input{
+  flex:1; min-width:0; border:2px solid var(--ink); background:var(--paper);
+  padding:11px 8px; font-size:18px; letter-spacing:4px; text-align:center; color:var(--ink);
+}
+.check-fila input:focus{outline:none; border-color:var(--accent);}
+.check-boton{background:var(--ink); color:var(--paper); border:2px solid var(--ink); padding:0 20px; font-weight:700; font-size:13px; cursor:pointer; transition:background var(--dur) var(--ease);}
+.check-boton:hover{background:var(--accent); border-color:var(--accent);}
+.check-boton-link{text-decoration:none; display:inline-block; padding:6px 16px;}
+.check-error{display:none; color:var(--accent); font-size:12px; font-weight:700; margin-top:12px;}
+.check-error.mostrar{display:block; animation:shake 0.3s var(--ease);}
+@keyframes shake{0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);}}
+
+.placeholder{border:2px dashed var(--line); padding:60px 30px; text-align:center; color:var(--ink-soft); font-size:13px; letter-spacing:0.05em; text-transform:uppercase;}
+
+/* ---------- VISITAS (tarjetas de instituciones) ---------- */
+.visitas-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px;}
+.visita-card{border:2px solid var(--ink); background:var(--paper-2); display:flex; flex-direction:column;}
+.visita-img{
+  aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;
+  border-bottom:2px solid var(--ink); background:var(--ink); position:relative; overflow:hidden;
+}
+.visita-img img{width:100%; height:100%; object-fit:cover; display:block;}
+.visita-img .mono{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.04em; color:var(--paper); text-align:center; padding:0 14px;}
+.visita-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.visita-nombre{font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; line-height:1.2;}
+.visita-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.55; flex:1;}
+
+footer{
+  border-top:2px solid var(--ink); padding:20px 5vw; max-width:1200px; margin:0 auto; width:100%;
+  font-size:11px; letter-spacing:0.05em; color:var(--ink-soft); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+}
+
+@media (max-width:640px){
+  .manifiesto-head .doc-line{width:100%; margin-left:0; order:3;}
+  .dato{width:88px; font-size:11px;}
+  .fila{font-size:12.5px; padding:9px 14px; gap:10px;}
+  .ticket-titulo h1{font-size:34px;}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <a href="#" class="marca" onclick="navegar('avisos'); return false;">BARILOCHE <span>2026</span></a>
+    <span class="folio">VIAJE DE ESTUDIOS</span>
+  </div>
+  <div class="perforacion"></div>
+  <nav class="tabs">
+    <button data-s="avisos" onclick="navegar('avisos')">Avisos</button>
+    <button data-s="asientos" onclick="navegar('asientos')">Asientos</button>
+    <button data-s="habitaciones" onclick="navegar('habitaciones')">Habitaciones</button>
+    <button data-s="visitas" onclick="navegar('visitas')">Visitas</button>
+    <button data-s="grupos" onclick="navegar('grupos')">Grupos</button>
+  </nav>
+</header>
+
+<!-- AVISOS -->
+<main id="s-avisos" class="seccion">
+  <div class="ticket-titulo"><h1>Avisos</h1><span class="idx">01 / 05</span></div>
+  <p class="lede">Dos planillas obligatorias para el viaje. Se completan a mano, con firma, y se entregan a los docentes.</p>
+
+  <div class="manifiesto">
+    <div class="manifiesto-head"><span class="cod">DOC. 01</span><span class="cant">Firma estudiante + tutor/a</span></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="num">PDF</span>
+        <span class="nombre">Acta Compromiso<span class="lugar">Pautas de comportamiento, convivencia y responsabilidades</span></span>
+        <a class="check-boton check-boton-link" href="https://drive.google.com/file/d/1ET0KG6Pk9WUg0M4d0j4S4vT8IjUCPs8Y/view?usp=sharing" target="_blank">Ver / Guardar</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="manifiesto">
+    <div class="manifiesto-head"><span class="cod">DOC. 02</span><span class="cant">Completa tutor/a</span></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="num">PDF</span>
+        <span class="nombre">Declaración Jurada de Salud<span class="lugar">Datos médicos, antecedentes, contacto de emergencia</span></span>
+        <a class="check-boton check-boton-link" href="https://drive.google.com/file/d/18zu1MKyuUIq1VAqHN0xt8t5OPde7mojt/view?usp=sharing" target="_blank">Ver / Guardar</a>
+      </li>
+    </ul>
+  </div>
+</main>
+
+<!-- ASIENTOS -->
+<main id="s-asientos" class="seccion">
+  <div class="ticket-titulo"><h1>Asientos<br>Colectivo</h1><span class="idx">02 / 05</span></div>
+  <div class="placeholder">— Próximamente —</div>
+</main>
+
+<!-- HABITACIONES -->
+<main id="s-habitaciones" class="seccion">
+  <div class="ticket-titulo"><h1>Habitaciones<br>Hostel</h1><span class="idx">03 / 05</span></div>
+  <div class="placeholder">— Próximamente —</div>
+</main>
+
+<!-- VISITAS -->
+<main id="s-visitas" class="seccion">
+  <div class="ticket-titulo"><h1>Visitas</h1><span class="idx">04 / 05</span></div>
+  <div class="visitas-grid">
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://www.altec.com.ar/wp-content/uploads/2026/04/iot.jpg" alt="ALTEC" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">ALTEC</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">ALTEC</span>
+        <span class="visita-desc">Empresa estatal rionegrina de tecnología, fundada en 1985 con sede en Bariloche. Desarrolla software de gestión pública, centros de datos, soluciones de IoT y telecomunicaciones.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://patagonianorte.conicet.gov.ar/wp-content/uploads/sites/79/2015/11/cct-noche-1024x680.jpg" alt="CCT CONICET" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">CCT<br>CONICET</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">CCT CONICET Patagonia Norte</span>
+        <span class="visita-desc">Centro Científico Tecnológico del CONICET creado en 2009, que administra institutos de investigación en la región andina de Río Negro, Neuquén y Chubut.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://frba.utn.edu.ar/wp-content/uploads/2017/02/bariloche-e1487270022290.jpg" alt="CET 2 · CET 25 · UTN" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">CET 2 · CET 25<br>UTN</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">CET 2 · CET 25 · UTN</span>
+        <span class="visita-desc">CET N.º 2 es la escuela técnica más grande de Bariloche, con más de 70 años y especialidad electromecánica. CET N.º 25 forma en hotelería y gastronomía. Allí funciona además, desde 2006, la extensión áulica de la UTN con la carrera de Ingeniería Mecánica.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://www.ib.edu.ar/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-30-at-11.50.03-AM.jpeg" alt="Instituto Balseiro" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">INSTITUTO<br>BALSEIRO</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">Instituto Balseiro</span>
+        <span class="visita-desc">Universidad de física e ingeniería creada en 1955 por convenio entre la CNEA y la Universidad Nacional de Cuyo, con sede en el Centro Atómico Bariloche y el reactor de investigación RA-6. Forma a sus estudiantes con becas completas del Estado.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://www.pagina12.com.ar/resizer/v2/MI2DQMJQGYYDIMLFMFSWCZRQGE.jpg?quality=75&amp;auth=b7f986af30cc56131715cf164321c2d11db747f26f23bfdf65e3a6c991736b10&amp;width=981" alt="INVAP" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">INVAP</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">INVAP</span>
+        <span class="visita-desc">Empresa estatal rionegrina fundada en 1976, surgida del Instituto Balseiro. Diseña y fabrica satélites, reactores nucleares, radares y equipamiento médico; es la única empresa de Latinoamérica certificada por la NASA para sistemas satelitales completos.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://anbariloche1.cdn.net.ar/252/anbariloche/images/87/81/878164_3a21285fc3d8894e850b2d56c50413dfc5459febb830e6f9a589939159028751/md.webp" alt="IRNAD" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">IRNAD</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">IRNAD (UNRN – CONICET)</span>
+        <span class="visita-desc">Instituto de Investigaciones en Recursos Naturales, Agroecología y Desarrollo Rural, unidad de doble dependencia entre la UNRN y el CONICET, con sede en Bariloche y El Bolsón.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://media-cdn.tripadvisor.com/media/photo-s/14/34/8b/14/museo-paleontologico.jpg" alt="Museo Paleontológico Bariloche" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">MUSEO<br>PALEONTOLÓGICO</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">Museo Paleontológico Bariloche</span>
+        <span class="visita-desc">Museo creado en 1977 por la Asociación Paleontológica Bariloche, sobre la costanera del lago Nahuel Huapi, dedicado a preservar y difundir el patrimonio fósil de la Patagonia.</span>
+      </div>
+    </div>
+
+    <div class="visita-card">
+      <div class="visita-img"><img src="https://www.unrn.edu.ar/images/noticia/max_2884_5.jpg?v=1666718088" alt="UNRN Sede Andina" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">UNRN</span></div>
+      <div class="visita-body">
+        <span class="visita-nombre">UNRN Sede Andina</span>
+        <span class="visita-desc">Sede de la Universidad Nacional de Río Negro en Bariloche y El Bolsón, con más de 20 carreras de grado entre ingenierías, licenciaturas y profesorados.</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- GRUPOS -->
+<main id="s-grupos" class="seccion">
+  <div class="ticket-titulo"><h1>Grupos</h1><span class="idx">05 / 05</span></div>
+
+  <div class="clase-selector" id="claseSelector">
+    <button data-v="1" class="activo">1</button>
+    <button data-v="2">2</button>
+    <button data-v="3">3</button>
+  </div>
+
+  <div class="panel-grupo activo" id="panelGrupo1">
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">1A</span><span class="cant">53 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva · Santiago Urweider · Víctor Santander</span></div>
+<ul class="lista">
+<li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso2"><span class="num">21</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">22</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">23</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">24</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">25</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">26</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">27</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">28</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">29</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">30</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">31</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+  </div>
+  <div class="panel-grupo" id="panelGrupo2">
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">2A</span><span class="cant">26 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva</span></div>
+<ul class="lista">
+<li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">03</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">04</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso2"><span class="num">07</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">08</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">09</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">10</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">11</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">12</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">13</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">14</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">15</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">16</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">17</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">18</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">19</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">20</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">21</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">22</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">23</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">24</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">25</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">26</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">2B</span><span class="cant">27 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
+<ul class="lista">
+<li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">07</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">08</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">09</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">10</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">11</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">12</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">13</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">14</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">18</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">19</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">20</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">21</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">22</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">23</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">24</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">25</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">26</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">27</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+  </div>
+  <div class="panel-grupo" id="panelGrupo3">
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">3A</span><span class="cant">18 PAX</span><span class="doc-line">Lucía Silva</span></div>
+<ul class="lista">
+<li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">03</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">04</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso2"><span class="num">07</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">08</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">09</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">10</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">11</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">12</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">13</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">14</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">18</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">3B</span><span class="cant">18 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
+<ul class="lista">
+<li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">07</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">08</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">09</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">10</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">11</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">12</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">13</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">14</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso2"><span class="num">15</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">16</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">17</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">18</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+</ul>
+</div>
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">3C</span><span class="cant">17 PAX</span><span class="doc-line">Marcelo Silva</span></div>
+<ul class="lista">
+<li class="fila curso2"><span class="num">01</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">02</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">03</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">04</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">05</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">06</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">07</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">08</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">09</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">10</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">11</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">12</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">13</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">14</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+  </div>
+</main>
+
+<footer>
+  <span>CENTRO DE EDUCACIÓN TÉCNICA N.º 1 • GENERAL ROCA • RÍO NEGRO • 2026</span>
+  <span>GR ⇄ BRC</span>
+</footer>
+
+<script>
+  const SECCIONES = ['avisos','asientos','habitaciones','visitas','grupos'];
+
+  function navegar(id, actualizarHash = true){
+    if (!SECCIONES.includes(id)) id = 'avisos';
+    document.querySelectorAll('.seccion').forEach(s => s.classList.remove('active'));
+    document.getElementById('s-' + id).classList.add('active');
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('activo', b.dataset.s === id));
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (actualizarHash && location.hash.slice(1) !== id){
+      try{ history.pushState(null, '', '#' + id); } catch(e){}
+    }
+  }
+  window.addEventListener('popstate', () => navegar(location.hash.slice(1) || 'avisos', false));
+
+  /* ---- Selector de división (Grupos) ---- */
+  const claseBtns = document.querySelectorAll('#claseSelector button');
+  const paneles = { '1': document.getElementById('panelGrupo1'), '2': document.getElementById('panelGrupo2'), '3': document.getElementById('panelGrupo3') };
+  claseBtns.forEach(b => {
+    b.addEventListener('click', () => {
+      claseBtns.forEach(x => x.classList.remove('activo'));
+      b.classList.add('activo');
+      Object.values(paneles).forEach(p => p.classList.remove('activo'));
+      paneles[b.dataset.v].classList.add('activo');
+    });
+  });
+
+  navegar(location.hash.slice(1) || 'avisos', false);
+</script>
+
+</body>
+</html>
