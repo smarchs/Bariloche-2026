@@ -90,11 +90,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .ticket-titulo h1{font-size:clamp(32px,5.5vw,56px); line-height:1;}
 .ticket-titulo .idx{font-size:12px; color:var(--ink-soft); letter-spacing:0.1em; text-transform:uppercase;}
 .lede{font-size:15px; color:var(--ink-soft); max-width:520px; margin-bottom:10px; line-height:1.6;}
-.sello{
-  display:inline-block; border:2px solid var(--accent); color:var(--accent);
-  font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
-  padding:6px 12px; transform:rotate(-2deg); margin-top:14px;
-}
 
 /* ---------- SELECTOR DE DIVISIÓN (clase de ticket) ---------- */
 .clase-selector{display:flex; gap:0; margin-bottom:28px; border:2px solid var(--ink); width:fit-content;}
@@ -136,7 +131,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .fila:hover .num{color:var(--accent);}
 #cronoContent .num{width:11ch; min-width:11ch; flex-shrink:0; white-space:nowrap;}
 .nombre{flex:1; font-weight:500;}
-.fila-doc .nombre{font-weight:700;}
 .badge{
   font-size:10.5px; font-weight:700; letter-spacing:0.04em; padding:2px 8px;
   border:1px solid var(--ink); flex-shrink:0;
@@ -148,8 +142,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .badge-curso2{background:#F1E3A6; color:var(--ink); border-color:#D9BE58;}
 .badge-curso3{background:#DCC9F0; color:var(--ink); border-color:#B78FDE;}
 .badge-doc{background:#E6E0D2; color:var(--ink); border-color:#B7AC8E;}
-.lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
-.fila:hover .lugar{color:var(--paper); opacity:0.75;}
 .lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
 .fila:hover .lugar{color:var(--paper); opacity:0.75;}
 .dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:right; flex-shrink:0; font-variant-numeric:tabular-nums;}
@@ -172,11 +164,12 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .check-fila{display:flex; gap:10px;}
 .check-fila input{
   flex:1; min-width:0; border:2px solid var(--ink); background:var(--paper);
-  padding:11px 12px; font-size:18px; letter-spacing:8px; text-align:center; color:var(--ink);
+  padding:11px 8px; font-size:18px; letter-spacing:4px; text-align:center; color:var(--ink);
 }
 .check-fila input:focus{outline:none; border-color:var(--accent);}
 .check-boton{background:var(--ink); color:var(--paper); border:2px solid var(--ink); padding:0 20px; font-weight:700; font-size:13px; cursor:pointer; transition:background var(--dur) var(--ease);}
 .check-boton:hover{background:var(--accent); border-color:var(--accent);}
+.check-boton-link{text-decoration:none; display:inline-block; padding:6px 16px;}
 .check-error{display:none; color:var(--accent); font-size:12px; font-weight:700; margin-top:12px;}
 .check-error.mostrar{display:block; animation:shake 0.3s var(--ease);}
 @keyframes shake{0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);}}
@@ -193,7 +186,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .visita-img img{width:100%; height:100%; object-fit:cover; display:block;}
 .visita-img .mono{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.04em; color:var(--paper); text-align:center; padding:0 14px;}
 .visita-body{padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
-.visita-fecha{font-size:10.5px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);}
 .visita-nombre{font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; line-height:1.2;}
 .visita-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.55; flex:1;}
 
@@ -223,24 +215,65 @@ footer{
   <div class="perforacion"></div>
   <nav class="tabs">
     <button data-s="avisos" onclick="navegar('avisos')">Avisos</button>
+    <button data-s="asientos" onclick="navegar('asientos')">Asientos</button>
+    <button data-s="habitaciones" onclick="navegar('habitaciones')">Habitaciones</button>
     <button data-s="visitas" onclick="navegar('visitas')">Visitas</button>
     <button data-s="grupos" onclick="navegar('grupos')">Grupos</button>
     <button data-s="cronograma" onclick="navegar('cronograma')">Cronograma</button>
-    <button data-s="habitaciones" onclick="navegar('habitaciones')">Habitaciones</button>
     <button data-s="basedatos" onclick="navegar('basedatos')">Base de Datos</button>
   </nav>
 </header>
 
+<!-- AVISOS -->
+<main id="s-avisos" class="seccion">
+  <div class="ticket-titulo"><h1>Avisos</h1><span class="idx">01 / 07</span></div>
+  <p class="lede">Dos planillas obligatorias para el viaje. Se completan a mano, con firma, y se entregan a los docentes.</p>
+
+  <div class="manifiesto">
+    <div class="manifiesto-head"><span class="cod">DOC. 01</span><span class="cant">Firma estudiante + tutor/a</span></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="num">PDF</span>
+        <span class="nombre">Acta Compromiso<span class="lugar">Pautas de comportamiento, convivencia y responsabilidades</span></span>
+        <a class="check-boton check-boton-link" href="https://drive.google.com/file/d/1ET0KG6Pk9WUg0M4d0j4S4vT8IjUCPs8Y/view?usp=sharing" target="_blank">Ver / Guardar</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="manifiesto">
+    <div class="manifiesto-head"><span class="cod">DOC. 02</span><span class="cant">Completa tutor/a</span></div>
+    <ul class="lista">
+      <li class="fila">
+        <span class="num">PDF</span>
+        <span class="nombre">Declaración Jurada de Salud<span class="lugar">Datos médicos, antecedentes, contacto de emergencia</span></span>
+        <a class="check-boton check-boton-link" href="https://drive.google.com/file/d/18zu1MKyuUIq1VAqHN0xt8t5OPde7mojt/view?usp=sharing" target="_blank">Ver / Guardar</a>
+      </li>
+    </ul>
+  </div>
+</main>
+
+<!-- ASIENTOS -->
+<main id="s-asientos" class="seccion">
+  <div class="ticket-titulo"><h1>Asientos<br>Colectivo</h1><span class="idx">02 / 07</span></div>
+  <div class="placeholder">— Próximamente —</div>
+</main>
+
+<!-- HABITACIONES -->
+<main id="s-habitaciones" class="seccion">
+  <div class="ticket-titulo"><h1>Habitaciones<br>Hostel</h1><span class="idx">03 / 07</span></div>
+  <div class="placeholder">— Próximamente —</div>
+</main>
+
 <!-- VISITAS -->
 <main id="s-visitas" class="seccion">
-  <div class="ticket-titulo"><h1>Visitas</h1><span class="idx">02 / 06</span></div>
+  <div class="ticket-titulo"><h1>Visitas</h1><span class="idx">04 / 07</span></div>
   <div class="visitas-grid">
 
     <div class="visita-card">
       <div class="visita-img"><img src="https://www.altec.com.ar/wp-content/uploads/2026/04/iot.jpg" alt="ALTEC" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">ALTEC</span></div>
       <div class="visita-body">
         <span class="visita-nombre">ALTEC</span>
-        <span class="visita-desc">Empresa de telecomunicaciones satelitales que opera la Estación Terrena Bariloche, vinculada a ARSAT e INVAP. Seguimiento y control de satélites geoestacionarios.</span>
+        <span class="visita-desc">Empresa estatal rionegrina de tecnología, fundada en 1985 con sede en Bariloche. Desarrolla software de gestión pública, centros de datos, soluciones de IoT y telecomunicaciones.</span>
       </div>
     </div>
 
@@ -248,7 +281,7 @@ footer{
       <div class="visita-img"><img src="https://patagonianorte.conicet.gov.ar/wp-content/uploads/sites/79/2015/11/cct-noche-1024x680.jpg" alt="CCT CONICET" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">CCT<br>CONICET</span></div>
       <div class="visita-body">
         <span class="visita-nombre">CCT CONICET Patagonia Norte</span>
-        <span class="visita-desc">Centro Científico Tecnológico que reúne varios institutos de investigación del CONICET en Bariloche. Charla sobre el Instituto de Nanociencia y Nanotecnología (INN) y las líneas de investigación del centro.</span>
+        <span class="visita-desc">Centro Científico Tecnológico del CONICET creado en 2009, que administra institutos de investigación en la región andina de Río Negro, Neuquén y Chubut.</span>
       </div>
     </div>
 
@@ -256,7 +289,7 @@ footer{
       <div class="visita-img"><img src="https://frba.utn.edu.ar/wp-content/uploads/2017/02/bariloche-e1487270022290.jpg" alt="CET 2 · CET 25 · UTN" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">CET 2 · CET 25<br>UTN</span></div>
       <div class="visita-body">
         <span class="visita-nombre">CET 2 · CET 25 · UTN</span>
-        <span class="visita-desc">Encuentro con escuelas técnicas de Bariloche y la Universidad Tecnológica Nacional, con intercambio sobre especialidades técnicas y oferta educativa de la ciudad.</span>
+        <span class="visita-desc">CET N.º 2 es la escuela técnica más grande de Bariloche, con más de 70 años y especialidad electromecánica. CET N.º 25 forma en hotelería y gastronomía. Allí funciona además, desde 2006, la extensión áulica de la UTN con la carrera de Ingeniería Mecánica.</span>
       </div>
     </div>
 
@@ -264,7 +297,7 @@ footer{
       <div class="visita-img"><img src="https://www.ib.edu.ar/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-30-at-11.50.03-AM.jpeg" alt="Instituto Balseiro" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">INSTITUTO<br>BALSEIRO</span></div>
       <div class="visita-body">
         <span class="visita-nombre">Instituto Balseiro</span>
-        <span class="visita-desc">Universidad de física e ingeniería nuclear dependiente de la CNEA y la Universidad Nacional de Cuyo. Charla con el director de Ingeniería Mecánica y recorrido por el reactor RA-6, la biblioteca y los laboratorios de mecánica.</span>
+        <span class="visita-desc">Universidad de física e ingeniería creada en 1955 por convenio entre la CNEA y la Universidad Nacional de Cuyo, con sede en el Centro Atómico Bariloche y el reactor de investigación RA-6. Forma a sus estudiantes con becas completas del Estado.</span>
       </div>
     </div>
 
@@ -272,7 +305,7 @@ footer{
       <div class="visita-img"><img src="https://www.pagina12.com.ar/resizer/v2/MI2DQMJQGYYDIMLFMFSWCZRQGE.jpg?quality=75&amp;auth=b7f986af30cc56131715cf164321c2d11db747f26f23bfdf65e3a6c991736b10&amp;width=981" alt="INVAP" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">INVAP</span></div>
       <div class="visita-body">
         <span class="visita-nombre">INVAP</span>
-        <span class="visita-desc">Empresa estatal rionegrina de alta tecnología. Diseña y fabrica satélites, reactores nucleares, radares y equipamiento médico, con fuerte presencia de ingeniería mecánica en sus desarrollos.</span>
+        <span class="visita-desc">Empresa estatal rionegrina fundada en 1976, surgida del Instituto Balseiro. Diseña y fabrica satélites, reactores nucleares, radares y equipamiento médico; es la única empresa de Latinoamérica certificada por la NASA para sistemas satelitales completos.</span>
       </div>
     </div>
 
@@ -280,7 +313,7 @@ footer{
       <div class="visita-img"><img src="https://anbariloche1.cdn.net.ar/252/anbariloche/images/87/81/878164_3a21285fc3d8894e850b2d56c50413dfc5459febb830e6f9a589939159028751/md.webp" alt="IRNAD" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">IRNAD</span></div>
       <div class="visita-body">
         <span class="visita-nombre">IRNAD (UNRN – CONICET)</span>
-        <span class="visita-desc">Instituto de Investigaciones en Recursos Naturales, Agroecología y Desarrollo Rural. Recorrido por el laboratorio de Química Analítica y sus líneas de trabajo.</span>
+        <span class="visita-desc">Instituto de Investigaciones en Recursos Naturales, Agroecología y Desarrollo Rural, unidad de doble dependencia entre la UNRN y el CONICET, con sede en Bariloche y El Bolsón.</span>
       </div>
     </div>
 
@@ -288,7 +321,7 @@ footer{
       <div class="visita-img"><img src="https://media-cdn.tripadvisor.com/media/photo-s/14/34/8b/14/museo-paleontologico.jpg" alt="Museo Paleontológico Bariloche" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">MUSEO<br>PALEONTOLÓGICO</span></div>
       <div class="visita-body">
         <span class="visita-nombre">Museo Paleontológico Bariloche</span>
-        <span class="visita-desc">Museo sobre la costanera del lago Nahuel Huapi dedicado a los fósiles y la historia geológica de la Patagonia, con réplicas de dinosaurios y piezas originales de la región.</span>
+        <span class="visita-desc">Museo creado en 1977 por la Asociación Paleontológica Bariloche, sobre la costanera del lago Nahuel Huapi, dedicado a preservar y difundir el patrimonio fósil de la Patagonia.</span>
       </div>
     </div>
 
@@ -296,7 +329,7 @@ footer{
       <div class="visita-img"><img src="https://www.unrn.edu.ar/images/noticia/max_2884_5.jpg?v=1666718088" alt="UNRN Sede Andina" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="mono" style="display:none;">UNRN</span></div>
       <div class="visita-body">
         <span class="visita-nombre">UNRN Sede Andina</span>
-        <span class="visita-desc">Feria de orientación vocacional de la Universidad Nacional de Río Negro, sede Andina, con charlas sobre vida universitaria y la transición de la formación al mundo del trabajo.</span>
+        <span class="visita-desc">Sede de la Universidad Nacional de Río Negro en Bariloche y El Bolsón, con más de 20 carreras de grado entre ingenierías, licenciaturas y profesorados.</span>
       </div>
     </div>
 
@@ -305,7 +338,7 @@ footer{
 
 <!-- GRUPOS -->
 <main id="s-grupos" class="seccion">
-  <div class="ticket-titulo"><h1>Grupos</h1><span class="idx">03 / 06</span></div>
+  <div class="ticket-titulo"><h1>Grupos</h1><span class="idx">05 / 07</span></div>
 
   <div class="clase-selector" id="claseSelector">
     <button data-v="1" class="activo">1</button>
@@ -317,10 +350,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">1A</span><span class="cant">53 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva · Santiago Urweider · Víctor Santander</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Lucía Silva</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Marcelo Silva</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Santiago Urweider</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Víctor Santander</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
@@ -381,8 +410,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">2A</span><span class="cant">26 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Lucía Silva</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Marcelo Silva</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
@@ -414,8 +441,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">2B</span><span class="cant">27 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Santiago Urweider</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Víctor Santander</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
@@ -450,7 +475,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">3A</span><span class="cant">18 PAX</span><span class="doc-line">Lucía Silva</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Lucía Silva</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
@@ -474,8 +498,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">3B</span><span class="cant">18 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Santiago Urweider</span><span class="badge badge-doc">DOC</span></li>
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Víctor Santander</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
@@ -499,7 +521,6 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">3C</span><span class="cant">17 PAX</span><span class="doc-line">Marcelo Silva</span></div>
 <ul class="lista">
-<li class="fila fila-doc"><span class="num"></span><span class="nombre">Marcelo Silva</span><span class="badge badge-doc">DOC</span></li>
 <li class="fila curso2"><span class="num">01</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">02</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">03</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
@@ -524,12 +545,12 @@ footer{
 
 <!-- CRONOGRAMA -->
 <main id="s-cronograma" class="seccion">
-  <div class="ticket-titulo"><h1>Cronograma</h1><span class="idx">04 / 06</span></div>
+  <div class="ticket-titulo"><h1>Cronograma</h1><span class="idx">06 / 07</span></div>
 
   <div class="check" id="pinGateCrono">
     <p class="check-label">Acceso restringido — PIN requerido</p>
     <div class="check-fila">
-      <input type="password" inputmode="numeric" maxlength="4" id="pinInputCrono" placeholder="····" autocomplete="off">
+      <input type="password" inputmode="numeric" maxlength="8" id="pinInputCrono" placeholder="········" autocomplete="off">
       <button class="check-boton" id="pinBtnCrono">Entrar</button>
     </div>
     <p class="check-error" id="pinErrorCrono">PIN incorrecto</p>
@@ -539,84 +560,78 @@ footer{
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">DOMINGO</span><span class="cant">13/09</span></div>
 <ul class="lista">
-<li class="fila"><span class="num">21:55</span><span class="nombre">Salida General Roca → Bariloche</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">21:55</span><span class="nombre">Salida General Roca → Bariloche<span class="lugar">IDA</span></span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">LUNES</span><span class="cant">14/09</span></div>
 <ul class="lista">
 <li class="fila"><span class="num">—</span><span class="nombre">Arribo a Bariloche</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Check-in — Italian Inn Hostel<span class="lugar">12 de Octubre 1939</span></span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Desayuno</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">13:30</span><span class="nombre">Balseiro — charla con el director de Ing. Mecánica + recorrido (RA-6, biblioteca, laboratorio)<span class="lugar">Av. Exequiel Bustillo 9500</span></span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Hostel — Cena</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Check-in — Hostel<span class="lugar">12 de Octubre 1939</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Desayuno — Hostel</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">13:30</span><span class="nombre">Instituto Balseiro<span class="lugar">Av. Exequiel Bustillo 9500</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Cena — Hostel</span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">MARTES</span><span class="cant">15/09</span></div>
 <ul class="lista">
-<li class="fila"><span class="num">—</span><span class="nombre">Desayuno</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Desayuno — Hostel</span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">10:00</span><span class="nombre">INVAP<span class="lugar">Cmte. Luis Piedrabuena 4950</span></span><span class="badge badge-c2">2B</span></li>
 <li class="fila"><span class="num">10:00</span><span class="nombre">ALTEC<span class="lugar">Henry Ford 1624, B° El Ñireco</span></span><span class="badge badge-c2">2A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo — Hostel</span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">14:00</span><span class="nombre">INVAP<span class="lugar">Cmte. Luis Piedrabuena 4950</span></span><span class="badge badge-c2">2A</span></li>
 <li class="fila"><span class="num">14:00</span><span class="nombre">ALTEC<span class="lugar">Henry Ford 1624, B° El Ñireco</span></span><span class="badge badge-c2">2B</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Hostel — Cena</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Cena — Hostel</span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">MIÉRCOLES</span><span class="cant">16/09</span></div>
 <ul class="lista">
-<li class="fila"><span class="num">—</span><span class="nombre">Desayuno</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">10:00</span><span class="nombre">CCT CONICET — Charla INN<span class="lugar">Pioneros 1250</span></span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Desayuno — Hostel</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">10:00</span><span class="nombre">CCT CONICET Patagonia Norte<span class="lugar">Pioneros 1250</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo — Hostel</span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">13:30</span><span class="nombre">Museo Paleontológico<span class="lugar">Av. 12 de Octubre y Sarmiento, Costanera del Nahuel Huapi</span></span><span class="badge badge-c3">3B</span></li>
 <li class="fila"><span class="num">14:30</span><span class="nombre">Museo Paleontológico<span class="lugar">Av. 12 de Octubre y Sarmiento, Costanera del Nahuel Huapi</span></span><span class="badge badge-c3">3A</span></li>
 <li class="fila"><span class="num">15:30</span><span class="nombre">Museo Paleontológico<span class="lugar">Av. 12 de Octubre y Sarmiento, Costanera del Nahuel Huapi</span></span><span class="badge badge-c3">3C</span></li>
 <li class="fila"><span class="num">—</span><span class="nombre">Compras — Centro</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Hostel — Cena</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Cena — Hostel</span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">JUEVES</span><span class="cant">17/09</span></div>
 <ul class="lista">
-<li class="fila"><span class="num">—</span><span class="nombre">Desayuno</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">10:00</span><span class="nombre">IRNAD-CONICET — Laboratorio de Química Analítica<span class="lugar">Anasagasti 1463</span></span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">CET 2 / CET 25 / UTN<span class="lugar">Fanny T. de Newbery 111</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Desayuno — Hostel</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">10:00</span><span class="nombre">IRNAD<span class="lugar">Anasagasti 1463</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo — Hostel</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">CET 2 · CET 25 · UTN<span class="lugar">Fanny T. de Newbery 111</span></span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">—</span><span class="nombre">Armado de bolsos y valijas</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Hostel — Cena</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Cena — Hostel</span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
 <div class="manifiesto">
 <div class="manifiesto-head"><span class="cod">VIERNES</span><span class="cant">18/09</span></div>
 <ul class="lista">
-<li class="fila"><span class="num">—</span><span class="nombre">Desayuno</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">09:00–13:00</span><span class="nombre">Muestra de Carreras UNRN (charla 10hs: grupo de 25 ‘Vida universitaria’, grupo de 15 ‘Formación al trabajo’, resto sin inscripción)<span class="lugar">Anasagasti 1463</span></span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Check-out — guardar bolsos</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Desayuno — Hostel</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">09:00</span><span class="nombre">UNRN Sede Andina<span class="lugar">Anasagasti 1463</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Check-out — Hostel<span class="lugar">Guardar bolsos</span></span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">—</span><span class="nombre">Almuerzo — Hostel</span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">—</span><span class="nombre">Circuito Chico</span><span class="badge badge-c1">1A</span></li>
 <li class="fila"><span class="num">—</span><span class="nombre">Compras — Centro</span><span class="badge badge-c1">1A</span></li>
-<li class="fila"><span class="num">19:30</span><span class="nombre">Regreso a General Roca — Terminal de ómnibus, Bariloche</span><span class="badge badge-c1">1A</span></li>
+<li class="fila"><span class="num">19:30</span><span class="nombre">Regreso Bariloche → General Roca<span class="lugar">VUELTA</span></span><span class="badge badge-c1">1A</span></li>
 </ul>
 </div>
   </div>
 </main>
 
-<!-- HABITACIONES -->
-<main id="s-habitaciones" class="seccion">
-  <div class="ticket-titulo"><h1>Habitaciones<br>Hostel</h1><span class="idx">05 / 06</span></div>
-  <div class="placeholder">— Próximamente —</div>
-</main>
-
 <!-- BASE DE DATOS -->
 <main id="s-basedatos" class="seccion">
-  <div class="ticket-titulo"><h1>Base de<br>Datos</h1><span class="idx">06 / 06</span></div>
+  <div class="ticket-titulo"><h1>Base de<br>Datos</h1><span class="idx">07 / 07</span></div>
 
   <div class="check" id="pinGate">
     <p class="check-label">Acceso restringido — PIN requerido</p>
     <div class="check-fila">
-      <input type="password" inputmode="numeric" maxlength="4" id="pinInput" placeholder="····" autocomplete="off">
+      <input type="password" inputmode="numeric" maxlength="8" id="pinInput" placeholder="········" autocomplete="off">
       <button class="check-boton" id="pinBtn">Entrar</button>
     </div>
     <p class="check-error" id="pinError">PIN incorrecto</p>
@@ -626,98 +641,71 @@ footer{
     <div class="db-encabezado"><span class="num"></span><span class="nombre">Estudiante</span><span class="badge-col">Curso</span><span class="dato">DNI</span><span class="dato">Teléfono</span></div>
     <div class="manifiesto">
       <ul class="lista">
-<li class="fila fila-db c1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.908.551</span><span class="dato">2984-163601</span></li>
-<li class="fila fila-db c1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.392.256</span><span class="dato">2984-379576</span></li>
-<li class="fila fila-db c1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.318.678</span><span class="dato">2984-151679</span></li>
-<li class="fila fila-db c1"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.663.537</span><span class="dato">3718-616439</span></li>
-<li class="fila fila-db c1"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.782.009</span><span class="dato">2984-511914</span></li>
-<li class="fila fila-db c1"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.531.162</span><span class="dato">2984-370776</span></li>
-<li class="fila fila-db c1"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.319.328</span><span class="dato">2984-226225</span></li>
-<li class="fila fila-db c1"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.908.656</span><span class="dato">2984-597778</span></li>
-<li class="fila fila-db c1"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.731.347</span><span class="dato">2984-142192</span></li>
-<li class="fila fila-db c1"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.914.793</span><span class="dato">2984-150707</span></li>
-<li class="fila fila-db c1"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.660.063</span><span class="dato">2984-638844</span></li>
-<li class="fila fila-db c1"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.653.081</span><span class="dato">2984-373083</span></li>
-<li class="fila fila-db c1"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.721.360</span><span class="dato">2984-887160</span></li>
-<li class="fila fila-db c1"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.391.162</span><span class="dato">2984-744472</span></li>
-<li class="fila fila-db c1"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.185.261</span><span class="dato">2984-638670</span></li>
-<li class="fila fila-db c1"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.318.625</span><span class="dato">2984-688213</span></li>
-<li class="fila fila-db c1"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span><span class="dato">46.931.809</span><span class="dato">2984-699672</span></li>
-<li class="fila fila-db c1"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.528.145</span><span class="dato">2945-338111</span></li>
-<li class="fila fila-db c1"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.391.172</span><span class="dato">2984-308278</span></li>
-<li class="fila fila-db c1"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.392.196</span><span class="dato">2984-336680</span></li>
-<li class="fila fila-db c2"><span class="num">21</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.185.829</span><span class="dato">2984-973621</span></li>
-<li class="fila fila-db c2"><span class="num">22</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.732.413</span><span class="dato">2984-781453</span></li>
-<li class="fila fila-db c2"><span class="num">23</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.047.733</span><span class="dato">2984-641636</span></li>
-<li class="fila fila-db c2"><span class="num">24</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.363.933</span><span class="dato">2984-416578</span></li>
-<li class="fila fila-db c2"><span class="num">25</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.392.191</span><span class="dato">2984-872175</span></li>
-<li class="fila fila-db c2"><span class="num">26</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.721.354</span><span class="dato">2984-663515</span></li>
-<li class="fila fila-db c2"><span class="num">27</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.908.917</span><span class="dato">2984-127727</span></li>
-<li class="fila fila-db c2"><span class="num">28</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.280.468</span><span class="dato">2984-396335</span></li>
-<li class="fila fila-db c2"><span class="num">29</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.185.842</span><span class="dato">2984-133986</span></li>
-<li class="fila fila-db c2"><span class="num">30</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.180</span><span class="dato">2984-145859</span></li>
-<li class="fila fila-db c2"><span class="num">31</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.192</span><span class="dato">2984-331266</span></li>
-<li class="fila fila-db c2"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.616.614</span><span class="dato">2984-224254</span></li>
-<li class="fila fila-db c2"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.007</span><span class="dato">2984-359995</span></li>
-<li class="fila fila-db c2"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.732.935</span><span class="dato">2984-634743</span></li>
-<li class="fila fila-db c2"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.914.738</span><span class="dato">2984-120684</span></li>
-<li class="fila fila-db c2"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.250.524</span><span class="dato">2984-357139</span></li>
-<li class="fila fila-db c3"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.013.368</span><span class="dato">2984-393465</span></li>
-<li class="fila fila-db c3"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span><span class="dato">47.049.190</span><span class="dato">2984-604654</span></li>
-<li class="fila fila-db c3"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.622</span><span class="dato">2984-353670</span></li>
-<li class="fila fila-db c3"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.300</span><span class="dato">2984-715233</span></li>
-<li class="fila fila-db c3"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.297</span><span class="dato">2984-211995</span></li>
-<li class="fila fila-db c3"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.291</span><span class="dato">2984-149794</span></li>
-<li class="fila fila-db c3"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span><span class="dato">45.376.156</span><span class="dato">2984-169388</span></li>
-<li class="fila fila-db c3"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.391.855</span><span class="dato">2984-390811</span></li>
-<li class="fila fila-db c3"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.627</span><span class="dato">2984-746080</span></li>
-<li class="fila fila-db c3"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.392.250</span><span class="dato">2984-389493</span></li>
-<li class="fila fila-db c3"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.636</span><span class="dato">2984-660829</span></li>
-<li class="fila fila-db c3"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.732.927</span><span class="dato">2984-136458</span></li>
-<li class="fila fila-db c3"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.392.192</span><span class="dato">2984-162479</span></li>
-<li class="fila fila-db c3"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.660.084</span><span class="dato">2984-520961</span></li>
-<li class="fila fila-db c3"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.391.845</span><span class="dato">2984-587166</span></li>
-<li class="fila fila-db c3"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.660.078</span><span class="dato">2984-139205</span></li>
-<li class="fila fila-db c3"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.299</span><span class="dato">2984-376475</span></li>
+<li class="fila"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.908.551</span><span class="dato">2984-163601</span></li>
+<li class="fila"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.392.256</span><span class="dato">2984-379576</span></li>
+<li class="fila"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.318.678</span><span class="dato">2984-151679</span></li>
+<li class="fila"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.663.537</span><span class="dato">3718-616439</span></li>
+<li class="fila"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.782.009</span><span class="dato">2984-511914</span></li>
+<li class="fila"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.531.162</span><span class="dato">2984-370776</span></li>
+<li class="fila"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.319.328</span><span class="dato">2984-226225</span></li>
+<li class="fila"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.908.656</span><span class="dato">2984-597778</span></li>
+<li class="fila"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.731.347</span><span class="dato">2984-142192</span></li>
+<li class="fila"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.914.793</span><span class="dato">2984-150707</span></li>
+<li class="fila"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.660.063</span><span class="dato">2984-638844</span></li>
+<li class="fila"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.653.081</span><span class="dato">2984-373083</span></li>
+<li class="fila"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span><span class="dato">47.721.360</span><span class="dato">2984-887160</span></li>
+<li class="fila"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.391.162</span><span class="dato">2984-744472</span></li>
+<li class="fila"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.185.261</span><span class="dato">2984-638670</span></li>
+<li class="fila"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.318.625</span><span class="dato">2984-688213</span></li>
+<li class="fila"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span><span class="dato">46.931.809</span><span class="dato">2984-699672</span></li>
+<li class="fila"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.528.145</span><span class="dato">2945-338111</span></li>
+<li class="fila"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.391.172</span><span class="dato">2984-308278</span></li>
+<li class="fila"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span><span class="dato">48.392.196</span><span class="dato">2984-336680</span></li>
+<li class="fila"><span class="num">21</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.185.829</span><span class="dato">2984-973621</span></li>
+<li class="fila"><span class="num">22</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.732.413</span><span class="dato">2984-781453</span></li>
+<li class="fila"><span class="num">23</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.047.733</span><span class="dato">2984-641636</span></li>
+<li class="fila"><span class="num">24</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.363.933</span><span class="dato">2984-416578</span></li>
+<li class="fila"><span class="num">25</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.392.191</span><span class="dato">2984-872175</span></li>
+<li class="fila"><span class="num">26</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.721.354</span><span class="dato">2984-663515</span></li>
+<li class="fila"><span class="num">27</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.908.917</span><span class="dato">2984-127727</span></li>
+<li class="fila"><span class="num">28</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.280.468</span><span class="dato">2984-396335</span></li>
+<li class="fila"><span class="num">29</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.185.842</span><span class="dato">2984-133986</span></li>
+<li class="fila"><span class="num">30</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.180</span><span class="dato">2984-145859</span></li>
+<li class="fila"><span class="num">31</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.192</span><span class="dato">2984-331266</span></li>
+<li class="fila"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.616.614</span><span class="dato">2984-224254</span></li>
+<li class="fila"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.391.007</span><span class="dato">2984-359995</span></li>
+<li class="fila"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.732.935</span><span class="dato">2984-634743</span></li>
+<li class="fila"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span><span class="dato">47.914.738</span><span class="dato">2984-120684</span></li>
+<li class="fila"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span><span class="dato">48.250.524</span><span class="dato">2984-357139</span></li>
+<li class="fila"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.013.368</span><span class="dato">2984-393465</span></li>
+<li class="fila"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span><span class="dato">47.049.190</span><span class="dato">2984-604654</span></li>
+<li class="fila"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.622</span><span class="dato">2984-353670</span></li>
+<li class="fila"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.300</span><span class="dato">2984-715233</span></li>
+<li class="fila"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.297</span><span class="dato">2984-211995</span></li>
+<li class="fila"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.291</span><span class="dato">2984-149794</span></li>
+<li class="fila"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span><span class="dato">45.376.156</span><span class="dato">2984-169388</span></li>
+<li class="fila"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.391.855</span><span class="dato">2984-390811</span></li>
+<li class="fila"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.627</span><span class="dato">2984-746080</span></li>
+<li class="fila"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.392.250</span><span class="dato">2984-389493</span></li>
+<li class="fila"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.616.636</span><span class="dato">2984-660829</span></li>
+<li class="fila"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.732.927</span><span class="dato">2984-136458</span></li>
+<li class="fila"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.392.192</span><span class="dato">2984-162479</span></li>
+<li class="fila"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.660.084</span><span class="dato">2984-520961</span></li>
+<li class="fila"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.391.845</span><span class="dato">2984-587166</span></li>
+<li class="fila"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.660.078</span><span class="dato">2984-139205</span></li>
+<li class="fila"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span><span class="dato">48.251.299</span><span class="dato">2984-376475</span></li>
       </ul>
     </div>
   </div>
 </main>
 
-<!-- AVISOS -->
-<main id="s-avisos" class="seccion">
-  <div class="ticket-titulo"><h1>Avisos</h1><span class="idx">01 / 06</span></div>
-  <p class="lede">Dos planillas obligatorias para el viaje. Se completan a mano, con firma, y se entregan a los docentes.</p>
-
-  <div class="manifiesto">
-    <div class="manifiesto-head"><span class="cod">DOC. 01</span><span class="cant">Firma estudiante + tutor/a</span></div>
-    <ul class="lista">
-      <li class="fila">
-        <span class="num">PDF</span>
-        <span class="nombre">Acta Compromiso<span class="lugar">Pautas de comportamiento, convivencia y responsabilidades</span></span>
-        <a class="check-boton" style="text-decoration:none; display:inline-block; padding:6px 16px;" href="https://drive.google.com/file/d/1ET0KG6Pk9WUg0M4d0j4S4vT8IjUCPs8Y/view?usp=sharing" target="_blank">Ver / Guardar</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="manifiesto">
-    <div class="manifiesto-head"><span class="cod">DOC. 02</span><span class="cant">Completa tutor/a</span></div>
-    <ul class="lista">
-      <li class="fila">
-        <span class="num">PDF</span>
-        <span class="nombre">Declaración Jurada de Salud<span class="lugar">Datos médicos, antecedentes, contacto de emergencia</span></span>
-        <a class="check-boton" style="text-decoration:none; display:inline-block; padding:6px 16px;" href="https://drive.google.com/file/d/18zu1MKyuUIq1VAqHN0xt8t5OPde7mojt/view?usp=sharing" target="_blank">Ver / Guardar</a>
-      </li>
-    </ul>
-  </div>
-</main>
-
 <footer>
   <span>CENTRO DE EDUCACIÓN TÉCNICA N.º 1 • GENERAL ROCA • RÍO NEGRO • 2026</span>
+  <span>GR ⇄ BRC</span>
 </footer>
 
 <script>
-  const SECCIONES = ['avisos','visitas','grupos','cronograma','habitaciones','basedatos'];
+  const SECCIONES = ['avisos','asientos','habitaciones','visitas','grupos','cronograma','basedatos'];
 
   function navegar(id, actualizarHash = true){
     if (!SECCIONES.includes(id)) id = 'avisos';
@@ -725,8 +713,8 @@ footer{
     document.getElementById('s-' + id).classList.add('active');
     document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('activo', b.dataset.s === id));
     window.scrollTo({top:0, behavior:'smooth'});
-    if (id === 'basedatos') resetPinGate();
-    if (id === 'cronograma') resetPinGateCrono();
+    if (id === 'basedatos') pinDB.reset();
+    if (id === 'cronograma') pinCrono.reset();
     if (actualizarHash && location.hash.slice(1) !== id){
       try{ history.pushState(null, '', '#' + id); } catch(e){}
     }
@@ -745,64 +733,42 @@ footer{
     });
   });
 
-  /* ---- Base de Datos: PIN ---- */
-  const PIN_CODE = '1857';
-  const pinGate = document.getElementById('pinGate');
-  const pinInput = document.getElementById('pinInput');
-  const pinBtn = document.getElementById('pinBtn');
-  const pinError = document.getElementById('pinError');
-  const dbContent = document.getElementById('dbContent');
+  /* ---- PIN de acceso (Base de Datos y Cronograma comparten lógica) ---- */
+  const PIN_CODE = '18572805';
 
-  function resetPinGate(){
-    pinGate.hidden = false;
-    dbContent.hidden = true;
-    pinInput.value = '';
-    pinError.classList.remove('mostrar');
-  }
-  function checkPin(){
-    if (pinInput.value === PIN_CODE){
-      pinGate.hidden = true;
-      dbContent.hidden = false;
-    } else {
-      pinError.classList.remove('mostrar');
-      void pinError.offsetWidth;
-      pinError.classList.add('mostrar');
-      pinInput.value = '';
-      pinInput.focus();
+  function crearPinGate(sufijo, contentId){
+    const gate = document.getElementById('pinGate' + sufijo);
+    const input = document.getElementById('pinInput' + sufijo);
+    const btn = document.getElementById('pinBtn' + sufijo);
+    const error = document.getElementById('pinError' + sufijo);
+    const content = document.getElementById(contentId);
+
+    function reset(){
+      gate.hidden = false;
+      content.hidden = true;
+      input.value = '';
+      error.classList.remove('mostrar');
     }
-  }
-  pinBtn.addEventListener('click', checkPin);
-  pinInput.addEventListener('input', () => { pinInput.value = pinInput.value.replace(/\D/g,''); });
-  pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
-
-  /* ---- Cronograma: mismo PIN ---- */
-  const pinGateCrono = document.getElementById('pinGateCrono');
-  const pinInputCrono = document.getElementById('pinInputCrono');
-  const pinBtnCrono = document.getElementById('pinBtnCrono');
-  const pinErrorCrono = document.getElementById('pinErrorCrono');
-  const cronoContent = document.getElementById('cronoContent');
-
-  function resetPinGateCrono(){
-    pinGateCrono.hidden = false;
-    cronoContent.hidden = true;
-    pinInputCrono.value = '';
-    pinErrorCrono.classList.remove('mostrar');
-  }
-  function checkPinCrono(){
-    if (pinInputCrono.value === PIN_CODE){
-      pinGateCrono.hidden = true;
-      cronoContent.hidden = false;
-    } else {
-      pinErrorCrono.classList.remove('mostrar');
-      void pinErrorCrono.offsetWidth;
-      pinErrorCrono.classList.add('mostrar');
-      pinInputCrono.value = '';
-      pinInputCrono.focus();
+    function check(){
+      if (input.value === PIN_CODE){
+        gate.hidden = true;
+        content.hidden = false;
+      } else {
+        error.classList.remove('mostrar');
+        void error.offsetWidth;
+        error.classList.add('mostrar');
+        input.value = '';
+        input.focus();
+      }
     }
+    btn.addEventListener('click', check);
+    input.addEventListener('input', () => { input.value = input.value.replace(/\D/g,''); });
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') check(); });
+    return { reset };
   }
-  pinBtnCrono.addEventListener('click', checkPinCrono);
-  pinInputCrono.addEventListener('input', () => { pinInputCrono.value = pinInputCrono.value.replace(/\D/g,''); });
-  pinInputCrono.addEventListener('keydown', e => { if (e.key === 'Enter') checkPinCrono(); });
+
+  const pinDB = crearPinGate('', 'dbContent');
+  const pinCrono = crearPinGate('Crono', 'cronoContent');
 
   navegar(location.hash.slice(1) || 'avisos', false);
 </script>
