@@ -144,20 +144,30 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .badge-doc{background:#E6E0D2; color:var(--ink); border-color:#B7AC8E;}
 .lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
 .fila:hover .lugar{color:var(--paper); opacity:0.75;}
-.dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:right; flex-shrink:0; font-variant-numeric:tabular-nums;}
+.dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:left; flex-shrink:0; font-variant-numeric:tabular-nums;}
+.dato-estado{width:88px !important; font-weight:700; text-align:left !important;}
+.dato-estado.ok{color:#4C7A4C;}
+.dato-estado.falta{color:var(--ink-soft);}
+.dato-estado.no-entregado{color:var(--accent);}
+.dato-obs{width:260px !important; text-align:left !important; white-space:normal; line-height:1.4; font-size:11.5px;}
 
 /* ---------- BASE DE DATOS: ENCABEZADO + PIN ---------- */
 .db-encabezado{
-  display:flex; align-items:center; gap:14px; padding:0 20px 8px; margin-bottom:2px;
+  display:flex; align-items:center; gap:14px; padding:0 18px 8px 20px; margin-bottom:2px;
   font-size:10.5px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
-  min-width:520px;
+  min-width:520px; border-left:2px solid transparent; border-right:2px solid transparent;
 }
 .db-encabezado .num{min-width:2.4ch;}
 .db-encabezado .nombre{flex:1;}
 .db-encabezado .badge-col{width:44px;}
-.db-encabezado .dato{width:104px; text-align:right;}
+.db-encabezado .dato{width:104px; text-align:left;}
+.db-encabezado span{font-size:10.5px !important;}
 .db-scroll{overflow-x:auto;}
-.db-scroll .manifiesto, .db-scroll .lista{min-width:520px;}
+.db-scroll .manifiesto, .db-scroll > .db-encabezado{width:max-content; min-width:100%;}
+.db-scroll .nombre{flex:0 0 240px; width:240px;}
+.db-scroll .num{flex:0 0 22px; width:22px;}
+.db-scroll .badge-col, .db-scroll .badge{flex:0 0 44px; width:44px; text-align:left;}
+.db-scroll .lista{min-width:520px;}
 
 .check{border:2px solid var(--ink); background:var(--paper-2); padding:26px 24px; max-width:380px;}
 .check-label{font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;}
@@ -199,6 +209,8 @@ footer{
   .dato{width:88px; font-size:11px;}
   .fila{font-size:12.5px; padding:9px 14px; gap:10px;}
   .ticket-titulo h1{font-size:34px;}
+  .db-scroll .dato:not(.dato-asiento):not(.dato-alerta):not(.dato-contacto):not(.dato-cobertura):not(.dato-estado):not(.dato-obs){width:104px !important; font-size:12px;}
+  .db-scroll > .db-encabezado{padding-left:14px; gap:10px;}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
@@ -248,6 +260,67 @@ footer{
         <a class="check-boton check-boton-link" href="https://drive.google.com/file/d/18zu1MKyuUIq1VAqHN0xt8t5OPde7mojt/view?usp=sharing" target="_blank">Ver / Guardar</a>
       </li>
     </ul>
+  </div>
+
+  <div class="db-scroll">
+  <div class="db-encabezado"><span class="num"></span><span class="nombre">Estudiante</span><span class="badge-col">Curso</span><span class="dato dato-estado">Acta</span><span class="dato dato-estado">DDJJ</span><span class="dato dato-obs">Observaciones</span></div>
+  <div class="manifiesto">
+    <ul class="lista">
+<li class="fila"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta la fecha en la sección de emergencia. No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta el parentesco del/de la informante.</span></li>
+<li class="fila"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">21</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">22</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica si posee o no posee cobertura médica.</span></li>
+<li class="fila"><span class="num">23</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">24</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">25</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">26</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta la fecha en la sección de emergencia. No especifica si posee o no posee cobertura médica.</span></li>
+<li class="fila"><span class="num">27</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">28</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">29</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">Falta el nombre del estudiante, la división y el nombre del tutor en la primera hoja.</span></li>
+<li class="fila"><span class="num">30</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">31</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta toda la sección de emergencia (nombre, teléfono, fecha y firma).</span></li>
+<li class="fila"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta el teléfono de contacto del alumno.</span></li>
+<li class="fila"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica antecedentes de internación y cirugía. Falta fecha en emergencia. No especifica si posee o no posee cobertura médica.</span></li>
+<li class="fila"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta el nombre del estudiante, la división y el nombre del tutor en la primera hoja. No especifica qué cobertura médica es.</span></li>
+<li class="fila"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+    </ul>
+  </div>
   </div>
 </main>
 
