@@ -186,6 +186,31 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 
 .placeholder{border:2px dashed var(--line); padding:60px 30px; text-align:center; color:var(--ink-soft); font-size:13px; letter-spacing:0.05em; text-transform:uppercase;}
 
+/* ---------- MAPA DE BUTACAS ---------- */
+.mapa-nota{font-size:13px; color:var(--ink-soft); max-width:620px; line-height:1.6; margin-bottom:22px; padding:14px 16px; border-left:3px solid var(--accent); background:var(--paper-2);}
+.mapa-butacas{display:flex; flex-wrap:wrap; gap:22px; align-items:stretch;}
+.mapa-piso{border:2px solid var(--ink); background:var(--paper-2); padding:14px; flex:1 1 320px; min-width:0;}
+.mapa-piso h3{font-family:'Space Grotesk',sans-serif; font-size:15px; margin:0 0 3px;}
+.mapa-piso .sub{font-size:10.5px; color:var(--ink-soft); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.07em;}
+.mapa-piso-fila{display:flex; align-items:stretch; gap:10px;}
+.mapa-grid-wrap{flex:1 1 auto; min-width:0; overflow-x:auto;}
+.mapa-lado{font-size:9.5px; font-weight:700; letter-spacing:0.06em; color:var(--ink-soft); text-transform:uppercase; flex-shrink:0; writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg); white-space:nowrap; display:flex; align-items:center; justify-content:center; background:var(--paper); border:1.5px solid var(--line-soft); border-radius:3px; padding:6px 3px;}
+.mapa-grid{display:grid; gap:4px; margin-bottom:4px;}
+.mapa-grid.piso1{grid-template-columns:repeat(13,28px);}
+.mapa-grid.pbaja{grid-template-columns:repeat(7,28px);}
+.mb-asiento{width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; border-radius:3px; background:var(--accent); color:#fff; font-family:'JetBrains Mono',monospace;}
+.mb-asiento.reservado{background:var(--ink-soft); color:var(--paper);}
+.mb-asiento.docente{background:var(--ink); color:var(--paper); border:1.5px solid var(--accent);}
+.mb-asiento.icono{background:var(--paper); border:1.5px solid var(--line-soft); color:var(--ink-soft); font-size:7.5px; font-weight:700; letter-spacing:-0.02em;}
+.mb-asiento.vacio{background:transparent; border:none;}
+.mapa-leyenda{display:flex; flex-wrap:wrap; gap:14px; margin-top:18px; font-size:11px; color:var(--ink-soft);}
+.mapa-leyenda span{display:inline-flex; align-items:center; gap:6px;}
+.mapa-leyenda i{width:14px; height:14px; border-radius:3px; display:inline-block;}
+.mapa-leyenda i.i-libre{background:var(--accent);}
+.mapa-leyenda i.i-reservado{background:var(--ink-soft);}
+.mapa-leyenda i.i-docente{background:var(--ink); border:1.5px solid var(--accent);}
+.mapa-leyenda i.i-icono{background:var(--paper); border:1.5px solid var(--line-soft);}
+
 /* ---------- VISITAS (tarjetas de instituciones) ---------- */
 .visitas-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px;}
 .visita-card{border:2px solid var(--ink); background:var(--paper-2); display:flex; flex-direction:column;}
@@ -211,6 +236,13 @@ footer{
   .ticket-titulo h1{font-size:34px;}
   .db-scroll .dato:not(.dato-asiento):not(.dato-alerta):not(.dato-contacto):not(.dato-cobertura):not(.dato-estado):not(.dato-obs){width:104px !important; font-size:12px;}
   .db-scroll > .db-encabezado{padding-left:14px; gap:10px;}
+  .mapa-butacas{gap:16px;}
+  .mapa-piso{padding:12px; flex:1 1 100%;}
+  .mb-asiento{width:22px; height:22px; font-size:9px;}
+  .mb-asiento.icono{font-size:6px;}
+  .mapa-grid{gap:3px;}
+  .mapa-grid.piso1{grid-template-columns:repeat(13,22px);}
+  .mapa-grid.pbaja{grid-template-columns:repeat(7,22px);}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
@@ -227,7 +259,7 @@ footer{
   <div class="perforacion"></div>
   <nav class="tabs">
     <button data-s="avisos" onclick="navegar('avisos')">Avisos</button>
-    <button data-s="asientos" onclick="navegar('asientos')">Asientos</button>
+    <button data-s="asientos" onclick="navegar('asientos')">Butacas</button>
     <button data-s="habitaciones" onclick="navegar('habitaciones')">Habitaciones</button>
     <button data-s="visitas" onclick="navegar('visitas')">Visitas</button>
     <button data-s="grupos" onclick="navegar('grupos')">Grupos</button>
@@ -271,18 +303,18 @@ footer{
 <li class="fila"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta la fecha en la sección de emergencia. No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica si posee o no posee cobertura médica.</span></li>
 <li class="fila"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No declara cobertura médica.</span></li>
-<li class="fila"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
-<li class="fila"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica si posee o no posee cobertura médica.</span></li>
 <li class="fila"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta el parentesco del/de la informante.</span></li>
+<li class="fila"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
@@ -297,28 +329,28 @@ footer{
 <li class="fila"><span class="num">29</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">30</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">31</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta toda la sección de emergencia (nombre, teléfono, fecha y firma).</span></li>
+<li class="fila"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
 <li class="fila"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">Falta el nombre del estudiante, la división y el nombre del tutor en la primera hoja. No especifica qué cobertura médica es.</span></li>
-<li class="fila"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
-<li class="fila"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
-<li class="fila"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+
+<li class="fila"><span class="num">35</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">36</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">37</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">38</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">39</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">40</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">41</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">42</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">43</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">44</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">45</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">46</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">47</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado falta">Incompleto</span><span class="dato dato-obs">No especifica número de afiliado de cobertura médica.</span></li>
+<li class="fila"><span class="num">48</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">49</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">50</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">51</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-obs">—</span></li>
+<li class="fila"><span class="num">52</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span><span class="dato dato-estado ok">Completo</span><span class="dato dato-estado no-entregado">No entregó</span><span class="dato dato-obs">—</span></li>
     </ul>
   </div>
   </div>
@@ -326,8 +358,57 @@ footer{
 
 <!-- ASIENTOS -->
 <main id="s-asientos" class="seccion">
-  <div class="ticket-titulo"><h1>Asientos<br>Colectivo</h1><span class="idx">02 / 06</span></div>
-  <div class="placeholder">— Próximamente —</div>
+  <div class="ticket-titulo"><h1>Butacas<br>Colectivo</h1><span class="idx">02 / 06</span></div>
+  <div class="visita-card" style="margin-bottom:24px;">
+    <div class="visita-body">
+      <span class="visita-nombre">¿Cómo se eligen las butacas?</span>
+      <span class="visita-desc">No hay asignación fija de butaca en el colectivo. Cada estudiante puede sentarse donde y con quien prefiera y no hay un orden específico para subir: se sube a medida que se va despachando el equipaje.</span>
+      <span class="visita-desc">La única excepción son las 6 butacas de la planta baja: se sortearon entre los estudiantes, y los 6 que salieron sorteados tienen derecho a usarlas en la ida. Para la vuelta se hace un nuevo sorteo, esta vez entre los que no salieron sorteados la primera vez, para que sean otros quienes las ocupen.</span>
+      <span class="visita-desc">Si entre ustedes quieren acomodarse, cambiar de lugar o negociar, está bien, se espera que se organicen solos. Si surge algún conflicto (por ejemplo, dos personas que quieren el mismo lugar), ahí intervienen los docentes y deciden ellos.</span>
+    </div>
+  </div>
+  <div class="mapa-butacas">
+    <div class="mapa-piso">
+      <h3>Planta baja</h3>
+      <div class="sub">Cama · 6 butacas</div>
+      <div class="mapa-piso-fila">
+        <span class="mapa-lado mapa-lado-izq">Parte delantera</span>
+        <div class="mapa-grid-wrap">
+<div class="mapa-grid pbaja">
+<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento docente">73</div><div class="mb-asiento docente">75</div><div class="mb-asiento docente">77</div>
+<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">CAFÉ</div>
+<div class="mb-asiento vacio"></div><div class="mb-asiento icono">BAÑO</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">61</div><div class="mb-asiento">63</div><div class="mb-asiento">65</div><div class="mb-asiento reservado">67</div>
+<div class="mb-asiento icono">CHOFER</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento">60</div><div class="mb-asiento">62</div><div class="mb-asiento">64</div><div class="mb-asiento reservado">66</div>
+</div>
+        </div>
+        <span class="mapa-lado mapa-lado-der">Parte trasera</span>
+      </div>
+    </div>
+    <div class="mapa-piso">
+      <h3>Primer piso</h3>
+      <div class="sub">Semi cama · 46 butacas</div>
+      <div class="mapa-piso-fila">
+        <span class="mapa-lado mapa-lado-izq">Parte delantera</span>
+        <div class="mapa-grid-wrap">
+<div class="mapa-grid piso1">
+<div class="mb-asiento">4</div><div class="mb-asiento">8</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento">20</div><div class="mb-asiento">24</div><div class="mb-asiento">28</div><div class="mb-asiento">32</div><div class="mb-asiento">36</div><div class="mb-asiento">40</div><div class="mb-asiento">44</div><div class="mb-asiento">48</div><div class="mb-asiento">52</div>
+<div class="mb-asiento">3</div><div class="mb-asiento">7</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento icono">CAFÉ</div><div class="mb-asiento">19</div><div class="mb-asiento">23</div><div class="mb-asiento">27</div><div class="mb-asiento">31</div><div class="mb-asiento">35</div><div class="mb-asiento">39</div><div class="mb-asiento">43</div><div class="mb-asiento">47</div><div class="mb-asiento">51</div>
+<div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento">2</div><div class="mb-asiento">6</div><div class="mb-asiento">10</div><div class="mb-asiento">14</div><div class="mb-asiento reservado">18</div><div class="mb-asiento">22</div><div class="mb-asiento">26</div><div class="mb-asiento">30</div><div class="mb-asiento">34</div><div class="mb-asiento">38</div><div class="mb-asiento">42</div><div class="mb-asiento">46</div><div class="mb-asiento">50</div>
+<div class="mb-asiento">1</div><div class="mb-asiento">5</div><div class="mb-asiento">9</div><div class="mb-asiento">13</div><div class="mb-asiento reservado">17</div><div class="mb-asiento">21</div><div class="mb-asiento">25</div><div class="mb-asiento">29</div><div class="mb-asiento">33</div><div class="mb-asiento">37</div><div class="mb-asiento">41</div><div class="mb-asiento">45</div><div class="mb-asiento">49</div>
+</div>
+        </div>
+        <span class="mapa-lado mapa-lado-der">Parte trasera</span>
+      </div>
+    </div>
+  </div>
+  <div class="mapa-leyenda">
+    <span><i class="i-libre"></i> Butaca</span>
+    <span><i class="i-docente"></i> Butaca docente</span>
+    <span><i class="i-reservado"></i> Reservado discapacidad</span>
+  </div>
+
 </main>
 
 <!-- HABITACIONES -->
@@ -420,7 +501,7 @@ footer{
 
   <div class="panel-grupo activo" id="panelGrupo1">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">1A</span><span class="cant">53 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva · Santiago Urweider · Víctor Santander</span></div>
+<div class="manifiesto-head"><span class="cod">1A</span><span class="cant">52 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva · Santiago Urweider · Víctor Santander</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
@@ -456,31 +537,31 @@ footer{
 <li class="fila curso2"><span class="num">32</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">33</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">34</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">35</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">36</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso3"><span class="num">37</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">38</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">39</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">40</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">41</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">42</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">43</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">44</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">45</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">46</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">47</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">48</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">49</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">50</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">51</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">52</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">53</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+
+<li class="fila curso2"><span class="num">35</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">36</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">37</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">38</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">39</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">40</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">41</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">42</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">43</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">44</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">45</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">46</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">47</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">48</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">49</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">50</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">51</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">52</span><span class="nombre">Villaruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
 </ul>
 </div>
   </div>
   <div class="panel-grupo" id="panelGrupo2">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">2A</span><span class="cant">26 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva</span></div>
+<div class="manifiesto-head"><span class="cod">2A</span><span class="cant">25 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
@@ -502,12 +583,12 @@ footer{
 <li class="fila curso2"><span class="num">18</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">19</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">20</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">21</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">22</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso3"><span class="num">23</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">24</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">25</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">26</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+
+<li class="fila curso2"><span class="num">21</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">22</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">23</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">24</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">25</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
 </ul>
 </div>
 <div class="manifiesto">
@@ -545,7 +626,7 @@ footer{
   </div>
   <div class="panel-grupo" id="panelGrupo3">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">3A</span><span class="cant">18 PAX</span><span class="doc-line">Lucía Silva</span></div>
+<div class="manifiesto-head"><span class="cod">3A</span><span class="cant">17 PAX</span><span class="doc-line">Lucía Silva</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
@@ -555,16 +636,15 @@ footer{
 <li class="fila curso1"><span class="num">06</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso2"><span class="num">07</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
 <li class="fila curso2"><span class="num">08</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">09</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">10</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">11</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">12</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">13</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">14</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso3"><span class="num">15</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">16</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">17</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">18</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso2"><span class="num">09</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">10</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">11</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">12</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">13</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">14</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
 </ul>
 </div>
 <div class="manifiesto">
@@ -584,9 +664,10 @@ footer{
 <li class="fila curso1"><span class="num">12</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">13</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">14</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso2"><span class="num">15</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">16</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">17</span><span class="nombre">Sombra, Thiago Benjamín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">15</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">16</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">17</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+
 <li class="fila curso2"><span class="num">18</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
 </ul>
 </div>
