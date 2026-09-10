@@ -141,7 +141,12 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .badge-curso1{background:#F5CBDA; color:var(--ink); border-color:#DE8FA9;}
 .badge-curso2{background:#F1E3A6; color:var(--ink); border-color:#D9BE58;}
 .badge-curso3{background:#DCC9F0; color:var(--ink); border-color:#B78FDE;}
-.badge-doc{background:#E6E0D2; color:var(--ink); border-color:#B7AC8E;}
+.badge-piso1{background:#C9E4DE; color:var(--ink); border-color:#7FBFAE;}
+.badge-piso2{background:#FFD9B3; color:var(--ink); border-color:#E5A662;}
+.hab-fila{gap:14px;}
+.hab-num{display:inline-flex; align-items:center; justify-content:center; min-width:38px; height:28px; padding:0 8px; border:2px solid var(--ink); background:var(--paper); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; flex-shrink:0;}
+.hab-tipo{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; letter-spacing:0.05em; color:var(--ink);}
+.hab-docente{background:var(--ink); color:var(--paper); border-radius:3px; padding:2px 8px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;}
 .lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
 .fila:hover .lugar{color:var(--paper); opacity:0.75;}
 .dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:left; flex-shrink:0; font-variant-numeric:tabular-nums;}
@@ -154,7 +159,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .dato-estado.falta{color:var(--ink-soft);}
 .dato-estado.no-entregado{color:var(--accent);}
 .dato-obs{width:260px !important; text-align:left !important; white-space:normal; line-height:1.4; font-size:11.5px;}
-.dato-estado.incompleto{color:#B08B2A;}
 
 /* ---------- BASE DE DATOS: ENCABEZADO + PIN ---------- */
 .db-encabezado{
@@ -174,39 +178,27 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .db-scroll .badge-col, .db-scroll .badge{flex:0 0 44px; width:44px; text-align:left;}
 .db-scroll .lista{min-width:520px;}
 
-.check{border:2px solid var(--ink); background:var(--paper-2); padding:26px 24px; max-width:380px;}
-.check-label{font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;}
-.check-fila{display:flex; gap:10px;}
-.check-fila input{
-  flex:1; min-width:0; border:2px solid var(--ink); background:var(--paper);
-  padding:11px 8px; font-size:18px; letter-spacing:4px; text-align:center; color:var(--ink);
-}
-.check-fila input:focus{outline:none; border-color:var(--accent);}
 .check-boton{background:var(--ink); color:var(--paper); border:2px solid var(--ink); padding:0 20px; font-weight:700; font-size:13px; cursor:pointer; transition:background var(--dur) var(--ease);}
 .check-boton:hover{background:var(--accent); border-color:var(--accent);}
 .check-boton-link{text-decoration:none; display:inline-block; padding:6px 16px;}
-.check-error{display:none; color:var(--accent); font-size:12px; font-weight:700; margin-top:12px;}
-.check-error.mostrar{display:block; animation:shake 0.3s var(--ease);}
-@keyframes shake{0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);}}
 
 .placeholder{border:2px dashed var(--line); padding:60px 30px; text-align:center; color:var(--ink-soft); font-size:13px; letter-spacing:0.05em; text-transform:uppercase;}
 
 /* ---------- MAPA DE BUTACAS ---------- */
-.mapa-nota{font-size:13px; color:var(--ink-soft); max-width:620px; line-height:1.6; margin-bottom:22px; padding:14px 16px; border-left:3px solid var(--accent); background:var(--paper-2);}
 .mapa-butacas{display:flex; flex-wrap:wrap; gap:22px; align-items:stretch;}
-.mapa-piso{border:2px solid var(--ink); background:var(--paper-2); padding:14px; flex:1 1 320px; min-width:0;}
+.mapa-piso{border:2px solid var(--ink); background:var(--paper-2); padding:14px; flex:1 1 260px; min-width:0; container-type:inline-size;}
 .mapa-piso h3{font-family:'Space Grotesk',sans-serif; font-size:15px; margin:0 0 3px;}
 .mapa-piso .sub{font-size:10.5px; color:var(--ink-soft); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.07em;}
-.mapa-piso-fila{display:flex; align-items:stretch; gap:10px;}
-.mapa-grid-wrap{flex:1 1 auto; min-width:0; overflow-x:auto;}
-.mapa-lado{font-size:9.5px; font-weight:700; letter-spacing:0.06em; color:var(--ink-soft); text-transform:uppercase; flex-shrink:0; writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg); white-space:nowrap; display:flex; align-items:center; justify-content:center; background:var(--paper); border:1.5px solid var(--line-soft); border-radius:3px; padding:6px 3px;}
+.mapa-piso-fila{display:flex; flex-direction:column; gap:8px;}
+.mapa-grid-wrap{overflow-x:auto;}
+.mapa-lado{font-size:9.5px; font-weight:700; letter-spacing:0.06em; color:var(--ink-soft); text-transform:uppercase; text-align:center; background:var(--paper); border:1.5px solid var(--line-soft); border-radius:3px; padding:4px 6px;}
 .mapa-grid{display:grid; gap:4px; margin-bottom:4px;}
-.mapa-grid.piso1{grid-template-columns:repeat(13,28px);}
-.mapa-grid.pbaja{grid-template-columns:repeat(7,28px);}
-.mb-asiento{width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; border-radius:3px; background:var(--accent); color:#fff; font-family:'JetBrains Mono',monospace;}
+.mapa-grid.piso1{grid-template-columns:repeat(5,1fr);}
+.mapa-grid.pbaja{grid-template-columns:repeat(5,1fr);}
+.mb-asiento{width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; font-size:clamp(9px,7.5cqw,20px); font-weight:700; border-radius:4px; background:var(--accent); color:#fff; font-family:'JetBrains Mono',monospace;}
 .mb-asiento.reservado{background:var(--ink-soft); color:var(--paper);}
 .mb-asiento.docente{background:var(--ink); color:var(--paper); border:1.5px solid var(--accent);}
-.mb-asiento.icono{background:var(--paper); border:1.5px solid var(--line-soft); color:var(--ink-soft); font-size:7.5px; font-weight:700; letter-spacing:-0.02em;}
+.mb-asiento.icono{background:var(--paper); border:1.5px solid var(--line-soft); color:var(--ink-soft); font-size:clamp(6px,5cqw,12px); font-weight:700; letter-spacing:-0.02em;}
 .mb-asiento.vacio{background:transparent; border:none;}
 .mapa-leyenda{display:flex; flex-wrap:wrap; gap:14px; margin-top:18px; font-size:11px; color:var(--ink-soft);}
 .mapa-leyenda span{display:inline-flex; align-items:center; gap:6px;}
@@ -214,7 +206,6 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .mapa-leyenda i.i-libre{background:var(--accent);}
 .mapa-leyenda i.i-reservado{background:var(--ink-soft);}
 .mapa-leyenda i.i-docente{background:var(--ink); border:1.5px solid var(--accent);}
-.mapa-leyenda i.i-icono{background:var(--paper); border:1.5px solid var(--line-soft);}
 
 /* ---------- VISITAS (tarjetas de instituciones) ---------- */
 .visitas-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px;}
@@ -243,11 +234,7 @@ footer{
   .db-scroll > .db-encabezado{padding-left:14px; gap:10px;}
   .mapa-butacas{gap:16px;}
   .mapa-piso{padding:12px; flex:1 1 100%;}
-  .mb-asiento{width:22px; height:22px; font-size:9px;}
-  .mb-asiento.icono{font-size:6px;}
   .mapa-grid{gap:3px;}
-  .mapa-grid.piso1{grid-template-columns:repeat(13,22px);}
-  .mapa-grid.pbaja{grid-template-columns:repeat(7,22px);}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
@@ -378,34 +365,44 @@ footer{
       <h3>Planta baja</h3>
       <div class="sub">Cama · 6 butacas</div>
       <div class="mapa-piso-fila">
-        <span class="mapa-lado mapa-lado-izq">Parte delantera</span>
+        <span class="mapa-lado">Parte delantera</span>
         <div class="mapa-grid-wrap">
 <div class="mapa-grid pbaja">
-<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento docente">73</div><div class="mb-asiento docente">75</div><div class="mb-asiento docente">77</div>
-<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
-<div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">CAFÉ</div>
-<div class="mb-asiento vacio"></div><div class="mb-asiento icono">BAÑO</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">61</div><div class="mb-asiento">63</div><div class="mb-asiento">65</div><div class="mb-asiento reservado">67</div>
-<div class="mb-asiento icono">CHOFER</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento">60</div><div class="mb-asiento">62</div><div class="mb-asiento">64</div><div class="mb-asiento reservado">66</div>
+<div class="mb-asiento icono">CHOFER</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento vacio"></div><div class="mb-asiento icono">BAÑO</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento">60</div><div class="mb-asiento">61</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div>
+<div class="mb-asiento">62</div><div class="mb-asiento">63</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento docente">73</div>
+<div class="mb-asiento">64</div><div class="mb-asiento">65</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento docente">75</div>
+<div class="mb-asiento reservado">66</div><div class="mb-asiento reservado">67</div><div class="mb-asiento icono">CAFÉ</div><div class="mb-asiento vacio"></div><div class="mb-asiento docente">77</div>
 </div>
         </div>
-        <span class="mapa-lado mapa-lado-der">Parte trasera</span>
+        <span class="mapa-lado">Parte trasera</span>
       </div>
     </div>
     <div class="mapa-piso">
       <h3>Primer piso</h3>
       <div class="sub">Semi cama · 46 butacas</div>
       <div class="mapa-piso-fila">
-        <span class="mapa-lado mapa-lado-izq">Parte delantera</span>
+        <span class="mapa-lado">Parte delantera</span>
         <div class="mapa-grid-wrap">
 <div class="mapa-grid piso1">
-<div class="mb-asiento">4</div><div class="mb-asiento">8</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento">20</div><div class="mb-asiento">24</div><div class="mb-asiento">28</div><div class="mb-asiento">32</div><div class="mb-asiento">36</div><div class="mb-asiento">40</div><div class="mb-asiento">44</div><div class="mb-asiento">48</div><div class="mb-asiento">52</div>
-<div class="mb-asiento">3</div><div class="mb-asiento">7</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento icono">CAFÉ</div><div class="mb-asiento">19</div><div class="mb-asiento">23</div><div class="mb-asiento">27</div><div class="mb-asiento">31</div><div class="mb-asiento">35</div><div class="mb-asiento">39</div><div class="mb-asiento">43</div><div class="mb-asiento">47</div><div class="mb-asiento">51</div>
-<div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">TV</div><div class="mb-asiento vacio"></div>
-<div class="mb-asiento">2</div><div class="mb-asiento">6</div><div class="mb-asiento">10</div><div class="mb-asiento">14</div><div class="mb-asiento reservado">18</div><div class="mb-asiento">22</div><div class="mb-asiento">26</div><div class="mb-asiento">30</div><div class="mb-asiento">34</div><div class="mb-asiento">38</div><div class="mb-asiento">42</div><div class="mb-asiento">46</div><div class="mb-asiento">50</div>
-<div class="mb-asiento">1</div><div class="mb-asiento">5</div><div class="mb-asiento">9</div><div class="mb-asiento">13</div><div class="mb-asiento reservado">17</div><div class="mb-asiento">21</div><div class="mb-asiento">25</div><div class="mb-asiento">29</div><div class="mb-asiento">33</div><div class="mb-asiento">37</div><div class="mb-asiento">41</div><div class="mb-asiento">45</div><div class="mb-asiento">49</div>
+<div class="mb-asiento">1</div><div class="mb-asiento">2</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">3</div><div class="mb-asiento">4</div>
+<div class="mb-asiento">5</div><div class="mb-asiento">6</div><div class="mb-asiento vacio"></div><div class="mb-asiento">7</div><div class="mb-asiento">8</div>
+<div class="mb-asiento">9</div><div class="mb-asiento">10</div><div class="mb-asiento icono">TV</div><div class="mb-asiento icono">ESC</div><div class="mb-asiento icono">ESC</div>
+<div class="mb-asiento">13</div><div class="mb-asiento">14</div><div class="mb-asiento vacio"></div><div class="mb-asiento icono">CAFÉ</div><div class="mb-asiento icono">ESC</div>
+<div class="mb-asiento reservado">17</div><div class="mb-asiento reservado">18</div><div class="mb-asiento vacio"></div><div class="mb-asiento">19</div><div class="mb-asiento">20</div>
+<div class="mb-asiento">21</div><div class="mb-asiento">22</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">23</div><div class="mb-asiento">24</div>
+<div class="mb-asiento">25</div><div class="mb-asiento">26</div><div class="mb-asiento vacio"></div><div class="mb-asiento">27</div><div class="mb-asiento">28</div>
+<div class="mb-asiento">29</div><div class="mb-asiento">30</div><div class="mb-asiento vacio"></div><div class="mb-asiento">31</div><div class="mb-asiento">32</div>
+<div class="mb-asiento">33</div><div class="mb-asiento">34</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">35</div><div class="mb-asiento">36</div>
+<div class="mb-asiento">37</div><div class="mb-asiento">38</div><div class="mb-asiento vacio"></div><div class="mb-asiento">39</div><div class="mb-asiento">40</div>
+<div class="mb-asiento">41</div><div class="mb-asiento">42</div><div class="mb-asiento vacio"></div><div class="mb-asiento">43</div><div class="mb-asiento">44</div>
+<div class="mb-asiento">45</div><div class="mb-asiento">46</div><div class="mb-asiento icono">TV</div><div class="mb-asiento">47</div><div class="mb-asiento">48</div>
+<div class="mb-asiento">49</div><div class="mb-asiento">50</div><div class="mb-asiento vacio"></div><div class="mb-asiento">51</div><div class="mb-asiento">52</div>
 </div>
         </div>
-        <span class="mapa-lado mapa-lado-der">Parte trasera</span>
+        <span class="mapa-lado">Parte trasera</span>
       </div>
     </div>
   </div>
@@ -420,7 +417,34 @@ footer{
 <!-- HABITACIONES -->
 <main id="s-habitaciones" class="seccion">
   <div class="ticket-titulo"><h1>Habitaciones<br>Hostel</h1><span class="idx">03 / 07</span></div>
-  <div class="placeholder">— Próximamente —</div>
+    <div class="visita-card" style="margin-bottom:24px;">
+    <div class="visita-body">
+      <span class="visita-nombre">¿Cómo se eligen las habitaciones?</span>
+      <span class="visita-desc">En esta misma pestaña se va a compartir un enlace a una planilla de Google con este mismo esquema de habitaciones. Para reservar un cuarto, vas a tener que tocar el cuadrito de esa habitación y dejar un comentario con nombre y apellido de todos los que la quieren ocupar —la cantidad de personas anotadas tiene que coincidir exacto con la capacidad del cuarto (si es de 3, van 3 nombres, ni más ni menos). El primer comentario que cumpla ese requisito queda confirmado para esa habitación.</span>
+      <span class="visita-desc">Los docentes nos reservamos el derecho de hacer ajustes si surge algún problema, aunque una habitación ya esté confirmada.</span>
+      <span class="visita-desc">Avisaremos por el grupo de WhatsApp cuándo se habilita el link, junto con un video corto explicando cómo reservar bien la habitación.</span>
+    </div>
+  </div>
+<ul class="lista">
+<li class="fila hab-fila"><span class="hab-num">102</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">103</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">104</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">105</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">106</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">107</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">108</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">109</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">DOBLE</span><span class="hab-docente">Docentes</span></li>
+<li class="fila hab-fila"><span class="hab-num">110</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">202</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">DOBLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">203</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">204</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">205</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">DOBLE</span><span class="hab-docente">Docentes</span></li>
+<li class="fila hab-fila"><span class="hab-num">206</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">207</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">208</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">209</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">210</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+</ul>
 </main>
 
 <!-- VISITAS -->
