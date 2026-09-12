@@ -147,6 +147,7 @@ nav.tabs button.activo{background:var(--ink); color:var(--paper);}
 .hab-num{display:inline-flex; align-items:center; justify-content:center; min-width:38px; height:28px; padding:0 8px; border:2px solid var(--ink); background:var(--paper); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13px; flex-shrink:0;}
 .hab-tipo{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:12px; letter-spacing:0.05em; color:var(--ink);}
 .hab-docente{background:var(--ink); color:var(--paper); border-radius:3px; padding:2px 8px; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;}
+.hab-obs{font-size:12px; color:var(--ink-soft); flex:1;}
 .lugar{display:block; font-size:11px; color:var(--ink-soft); font-weight:400; margin-top:2px;}
 .fila:hover .lugar{color:var(--paper); opacity:0.75;}
 .dato{font-size:12px; color:var(--ink-soft); width:104px; text-align:left; flex-shrink:0; font-variant-numeric:tabular-nums;}
@@ -412,31 +413,25 @@ footer{
 <!-- HABITACIONES -->
 <main id="s-habitaciones" class="seccion">
   <div class="ticket-titulo"><h1>Habitaciones<br>Hostel</h1><span class="idx">03 / 06</span></div>
-    <div class="visita-card" style="margin-bottom:24px;">
-    <div class="visita-body">
-      <span class="visita-nombre">¿Cómo se eligen las habitaciones?</span>
-      <span class="visita-desc">Para reservar un cuarto, tocá el cuadrito de esa habitación en la planilla de abajo y dejá un comentario con nombre y apellido de todos los que la quieren ocupar —la cantidad de personas anotadas tiene que coincidir exacto con la capacidad del cuarto (si es de 3, van 3 nombres, ni más ni menos). El primer comentario que cumpla ese requisito queda confirmado para esa habitación.</span>
-      <span class="visita-desc">Los docentes nos reservamos el derecho de hacer ajustes si surge algún problema, aunque una habitación ya esté confirmada.</span>
-      <a class="check-boton check-boton-link" href="https://docs.google.com/spreadsheets/d/1wMO_bkRcxsySlCHjQRTwTblnhj7xWc2v5pJJ9ar0H24/edit?usp=sharing" target="_blank" style="align-self:flex-start; margin-top:4px;">Reservar habitación →</a>
-    </div>
-  </div>
 <ul class="lista">
-<li class="fila hab-fila"><span class="hab-num">102</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">103</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">104</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">105</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">106</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">107</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">108</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">110</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">202</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">DOBLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">203</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">204</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">206</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">207</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">208</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">209</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
-<li class="fila hab-fila"><span class="hab-num">210</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span></li>
+<li class="fila hab-fila"><span class="hab-num">102</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Atis, Bova, Hernández M.</span></li>
+<li class="fila hab-fila"><span class="hab-num">103</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span><span class="hab-obs">Asenjo, Benítez, Caram, Carrieri.</span></li>
+<li class="fila hab-fila"><span class="hab-num">104</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Aguayo, Amrein, Barrios.</span></li>
+<li class="fila hab-fila"><span class="hab-num">105</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Aballay, Colilaf, Cortez.</span></li>
+<li class="fila hab-fila"><span class="hab-num">106</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Álvarez, Bravo, Vázquez.</span></li>
+<li class="fila hab-fila"><span class="hab-num">107</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Aliaga, Huaiquimil, Ruíz.</span></li>
+<li class="fila hab-fila"><span class="hab-num">108</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Cortijo, Hernández L., Hueitra.</span></li>
+<li class="fila hab-fila"><span class="hab-num">109</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">DOBLE</span><span class="hab-docente">Silva Lucía, Silva Marcelo.</span></li>
+<li class="fila hab-fila"><span class="hab-num">110</span><span class="badge badge-piso1">1.º piso</span><span class="hab-tipo">CUÁDRUPLE</span><span class="hab-obs">Antinori, Antrichipay, Bustos, Villarruel.</span></li>
+<li class="fila hab-fila"><span class="hab-num">202</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">DOBLE</span><span class="hab-obs">Alegre, Medina.</span></li>
+<li class="fila hab-fila"><span class="hab-num">203</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">García, Huentemil, Velázquez.</span></li>
+<li class="fila hab-fila"><span class="hab-num">204</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Bou Abdo, Díaz, Mhounh.</span></li>
+<li class="fila hab-fila"><span class="hab-num">205</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">DOBLE</span><span class="hab-docente">Urweider Santiago, Santander Víctor.</span></li>
+<li class="fila hab-fila"><span class="hab-num">206</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">Carrasco, D'Agostino, Vergara.</span></li>
+<li class="fila hab-fila"><span class="hab-num">207</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">TRIPLE</span><span class="hab-obs">González, Marinao, Condori.</span></li>
+<li class="fila hab-fila"><span class="hab-num">208</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span><span class="hab-obs">Cide, Coronel, De la Hoz, Sáez.</span></li>
+<li class="fila hab-fila"><span class="hab-num">209</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span><span class="hab-obs">Cabrera, Campos, Gómez, Osses.</span></li>
+<li class="fila hab-fila"><span class="hab-num">210</span><span class="badge badge-piso2">2.º piso</span><span class="hab-tipo">CUÁDRUPLE</span><span class="hab-obs">Beroiza, Fuentealba, Mansilla, Millaldeo.</span></li>
 </ul>
 </main>
 
@@ -524,7 +519,7 @@ footer{
 
   <div class="panel-grupo activo" id="panelGrupo1">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">1A</span><span class="cant">52 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva · Santiago Urweider · Víctor Santander</span></div>
+<div class="manifiesto-head"><span class="cod">1A</span><span class="cant">52 PAX</span><span class="doc-line">Silva Lucía · Silva Marcelo · Urweider Santiago · Santander Víctor</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
@@ -584,72 +579,71 @@ footer{
   </div>
   <div class="panel-grupo" id="panelGrupo2">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">2A</span><span class="cant">25 PAX</span><span class="doc-line">Lucía Silva · Marcelo Silva</span></div>
-<ul class="lista">
-<li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">03</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">04</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">05</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">06</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso2"><span class="num">07</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">08</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">09</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">10</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">11</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">12</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">13</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">14</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">15</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">16</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">17</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">18</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">19</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">20</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
-
-<li class="fila curso2"><span class="num">21</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso3"><span class="num">22</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">23</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">24</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">25</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
-</ul>
-</div>
-<div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">2B</span><span class="cant">27 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
+<div class="manifiesto-head"><span class="cod">2A</span><span class="cant">28 PAX</span><span class="doc-line">Silva Lucía · Silva Marcelo</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">03</span><span class="nombre">Atis, Lautaro Emanuel</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">04</span><span class="nombre">Bova, Francisco Tomás</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">05</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">06</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">07</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">08</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">09</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">10</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">11</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">12</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">13</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso1"><span class="num">14</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso3"><span class="num">15</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">16</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">17</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">18</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">19</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">20</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">21</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">22</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">23</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">24</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">25</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">26</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">27</span><span class="nombre">Villarruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso1"><span class="num">05</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">06</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">07</span><span class="nombre">Colilaf, Benjamín Ian</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">08</span><span class="nombre">Condori Huarachi, Franco Denis</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">09</span><span class="nombre">Cortez Izquierdo, Joaquín Ignacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">10</span><span class="nombre">Fuentealba, Ailén del Carmen</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">11</span><span class="nombre">García Suárez, Ezequiel Enrique</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">12</span><span class="nombre">Gómez, Gimena Magdalena</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">13</span><span class="nombre">González, Valentín Bruno</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">14</span><span class="nombre">Hernández, Mateo Bautista</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">15</span><span class="nombre">Huaiquimil, Matías Oscar</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">16</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">17</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">18</span><span class="nombre">Millaldeo Venegas, Geraldine Daiana</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">19</span><span class="nombre">Osses González, Samira Yasmín</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso1"><span class="num">20</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
+<li class="fila curso2"><span class="num">21</span><span class="nombre">Alegre, Camila Alelí</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">22</span><span class="nombre">Beroiza, Daiana Mailén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">23</span><span class="nombre">Mansilla, Rocío Belén</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">24</span><span class="nombre">Medina, Sofía Helena</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">25</span><span class="nombre">Cide Bueno, Cala</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">26</span><span class="nombre">Coronel, Tihara Anabella</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">27</span><span class="nombre">De la Hoz, Magdalena Luján</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">28</span><span class="nombre">Sáez, Melina Adriana</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">2B</span><span class="cant">24 PAX</span><span class="doc-line">Urweider Santiago · Santander Víctor</span></div>
+<ul class="lista">
+<li class="fila curso2"><span class="num">01</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">02</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">03</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">04</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">05</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">06</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">07</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">08</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">09</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">10</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">11</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">12</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">13</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">14</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">18</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">19</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">20</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">21</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">22</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">23</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">24</span><span class="nombre">Villarruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
 </ul>
 </div>
   </div>
   <div class="panel-grupo" id="panelGrupo3">
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">3A</span><span class="cant">14 PAX</span><span class="doc-line">Lucía Silva</span></div>
+<div class="manifiesto-head"><span class="cod">3A</span><span class="cant">14 PAX</span><span class="doc-line">Silva Lucía</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Cabrera, Agustina</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Campos, Priscila Giuliana</span><span class="badge badge-curso1">1.ª</span></li>
@@ -668,7 +662,36 @@ footer{
 </ul>
 </div>
 <div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">3B</span><span class="cant">25 PAX</span><span class="doc-line">Santiago Urweider · Víctor Santander</span></div>
+<div class="manifiesto-head"><span class="cod">3B</span><span class="cant">24 PAX</span><span class="doc-line">Urweider Santiago · Santander Víctor</span></div>
+<ul class="lista">
+<li class="fila curso2"><span class="num">01</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">02</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">03</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">04</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">05</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">06</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">07</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">08</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">09</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">10</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso2"><span class="num">11</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
+<li class="fila curso3"><span class="num">12</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">13</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">14</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">15</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">16</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">17</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">18</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">19</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">20</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">21</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">22</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">23</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
+<li class="fila curso3"><span class="num">24</span><span class="nombre">Villarruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
+</ul>
+</div>
+<div class="manifiesto">
+<div class="manifiesto-head"><span class="cod">3C</span><span class="cant">14 PAX</span><span class="doc-line">Silva Marcelo</span></div>
 <ul class="lista">
 <li class="fila curso1"><span class="num">01</span><span class="nombre">Aballay, Lautaro Nehuén</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">02</span><span class="nombre">Aliaga Álvarez, Tobías</span><span class="badge badge-curso1">1.ª</span></li>
@@ -684,35 +707,6 @@ footer{
 <li class="fila curso1"><span class="num">12</span><span class="nombre">Huentemil, Taiel Horacio</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">13</span><span class="nombre">Marinao, Alexis Alejo Nataniel</span><span class="badge badge-curso1">1.ª</span></li>
 <li class="fila curso1"><span class="num">14</span><span class="nombre">Velázquez Sepulveda, Álvaro Manuel</span><span class="badge badge-curso1">1.ª</span></li>
-<li class="fila curso2"><span class="num">15</span><span class="nombre">Aguayo, Daniel Esteban</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">16</span><span class="nombre">Álvarez, Denis Rafael</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">17</span><span class="nombre">Amrein, Franco Silvan</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">18</span><span class="nombre">Barrios, Bruno Nicolás</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">19</span><span class="nombre">Carrasco, Matías Emanuel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">20</span><span class="nombre">D'Agostino, Milo Joaquín</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">21</span><span class="nombre">Gonzalez Cortijo, Lucas Daniel</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">22</span><span class="nombre">Hernández Gatica, Lucio</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">23</span><span class="nombre">Hueitra Molines, Bautista Gastón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">24</span><span class="nombre">Samuel Vázquez, Simón</span><span class="badge badge-curso2">2.ª</span></li>
-<li class="fila curso2"><span class="num">25</span><span class="nombre">Vergara López, Bruno Alejandro</span><span class="badge badge-curso2">2.ª</span></li>
-</ul>
-</div>
-<div class="manifiesto">
-<div class="manifiesto-head"><span class="cod">3C</span><span class="cant">13 PAX</span><span class="doc-line">Marcelo Silva</span></div>
-<ul class="lista">
-<li class="fila curso3"><span class="num">01</span><span class="nombre">Antinori, Thiago Elías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">02</span><span class="nombre">Antrichipay Matus, Franco Jeremías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">03</span><span class="nombre">Asenjo Rodríguez, Galo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">04</span><span class="nombre">Benítez, Lisandro Agustín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">05</span><span class="nombre">Bou Abdo, Franco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">06</span><span class="nombre">Bravo, Lautaro Facundo</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">07</span><span class="nombre">Bustos, Benjamín Pablo Isaías</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">08</span><span class="nombre">Caram, Emir Omar</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">09</span><span class="nombre">Carrieri, Luciano Valentín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">10</span><span class="nombre">Díaz, Tomás Tiziano</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">11</span><span class="nombre">Mhounh Maripini, Luca Francisco</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">12</span><span class="nombre">Ruíz, Santiago Benjamín</span><span class="badge badge-curso3">3.ª</span></li>
-<li class="fila curso3"><span class="num">13</span><span class="nombre">Villarruel, Fausto Nicanor</span><span class="badge badge-curso3">3.ª</span></li>
 </ul>
 </div>
   </div>
